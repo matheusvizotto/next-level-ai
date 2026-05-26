@@ -81,6 +81,8 @@ Guarde a resposta como `agente: sim | nao`.
 
 ## Fase 4 — Importar contexto de outra IA
 
+> ⚠️ **ANTES DE COMEÇAR ESTA FASE:** confirme internamente qual `modo` foi capturado na Fase 2 (`solo` ou `empresa`). Os templates de prompt abaixo têm duas versões — use a que bate com o modo. Não misture.
+
 Pergunta via AskUserQuestion:
 
 - Pergunta: "Você já usa outra IA hoje (ChatGPT, Claude, Gemini, Perplexity)? Posso te dar um prompt pra ela mandar tudo que sabe sobre {{você OU sua empresa, conforme modo}} — você cola a resposta de volta aqui e eu preencho seu vault com profundidade real, em vez de só placeholders."
@@ -239,6 +241,8 @@ Use esses dados na Fase 7 pra pré-preencher os arquivos antes de aplicar as res
 
 ## Fase 5 — 8 perguntas (uma por vez via AskUserQuestion)
 
+> ⚠️ **ANTES DE COMEÇAR ESTA FASE:** confirme internamente qual `modo` foi capturado na Fase 2. Existem 2 versões completas das 8 perguntas — **Versão SOLO** ou **Versão EMPRESA**. Use só uma. NÃO faça 16 perguntas misturando as duas. Se o modo for `solo`, ignore completamente a seção "Versão modo EMPRESA". Se o modo for `empresa`, ignore completamente a seção "Versão modo SOLO".
+
 Faça uma pergunta por vez. Não agrupe. Não comente entre as perguntas — vá direto pra próxima.
 
 **As perguntas mudam dependendo do `modo`. Use a versão correta.**
@@ -348,6 +352,8 @@ Pergunta via AskUserQuestion:
 ---
 
 ## Fase 7 — Construção (trabalhe em silêncio)
+
+> ⚠️ **ANTES DE COMEÇAR ESTA FASE:** confirme qual `modo` foi capturado na Fase 2. As seções 7.2, 7.3 e 7.4 abaixo têm caminhos separados pra `solo` vs `empresa` — execute SÓ o caminho do modo capturado. NÃO crie operator.md/organization.md/team.md se for solo. NÃO crie me.md se for empresa.
 
 Combine todas as fontes nesta ordem de prioridade (a mais recente sobrescreve a anterior em caso de conflito):
 1. `contexto_ia` da Fase 4 (base ampla)
