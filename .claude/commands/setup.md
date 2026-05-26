@@ -8,6 +8,21 @@ Você vai configurar o vault para o usuário em 3 fases. Execute em ordem.
 
 ---
 
+## Idioma / Language
+
+Detecte o idioma da mensagem que invocou esse comando (a mensagem do usuário que disparou `/setup`) e use esse idioma em TODOS os textos visíveis: mensagem de boas-vindas, `question` e `header` do AskUserQuestion, cada `label` e `description` das opções, mensagens de status, e a confirmação final.
+
+- Mensagem em português → PT-BR (padrão deste programa).
+- Mensagem em inglês → traduza todas as perguntas, headers, labels e descriptions para inglês equivalente.
+- Mensagem em espanhol → traduza para espanhol.
+- Idioma ambíguo → PT-BR.
+
+A audiência principal é Brasil, então PT-BR é o default. Mas se alguém rodar em outra língua, adapte por respeito. Conteúdo de arquivos (`02 Context/me.md`, frontmatter, `01 Daily/`, nomes de pasta) permanece como está no template — não traduza paths, chaves de frontmatter, nem nomes de arquivo.
+
+Aceite respostas do usuário por intenção, não por string exata. Se ele responde em outro idioma do que a pergunta, continue na língua dele.
+
+---
+
 ## Fase 1 — Boas-vindas
 
 Antes de qualquer pergunta, envie esta mensagem curta:
