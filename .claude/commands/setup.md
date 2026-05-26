@@ -63,6 +63,8 @@ Aceite qualquer sinal claro: "solo", "individual", "freelancer", "profissional" 
 
 ## Fase 3 — Agente IA
 
+### 3.1 — Quer agente?
+
 Pergunta via AskUserQuestion:
 
 - Pergunta: "Quer um agente IA persistente neste vault? Ele aprende seu contexto, salva notas automaticamente, gerencia sessões e roda revisões diárias/semanais."
@@ -73,9 +75,33 @@ Pergunta via AskUserQuestion:
 
 Guarde a resposta como `agente: sim | nao`.
 
-**Se `agente: nao`:** pule direto pra Fase 7 (Construção). Não faça as Fases 4, 5 e 6. Crie só a estrutura base e o `me.md` (modo solo) ou `operator.md` + `organization.md` (modo empresa) em branco. Avise no final que o usuário pode rodar `/setup` de novo a qualquer momento pra adicionar o agente.
+**Se `agente: nao`:** pule direto pra Fase 7 (Construção). Não faça as Fases 3.2, 4, 5 e 6. Crie só a estrutura base e o `me.md` (modo solo) ou `operator.md` + `organization.md` (modo empresa) em branco. Avise no final que o usuário pode rodar `/setup` de novo a qualquer momento pra adicionar o agente.
 
-**Se `agente: sim`:** continue pra Fase 4.
+**Se `agente: sim`:** continue pra 3.2.
+
+### 3.2 — Nome do agente
+
+Pergunta via AskUserQuestion (só se `agente: sim`):
+
+- Pergunta: "Que nome você quer dar pro seu agente? Algo pessoal tipo 'JARVIS', 'Atlas', 'Sofia' ou o nome que você quiser. Esse nome aparece no hub do seu vault e nos logs de sessão."
+- Header: `Nome do agente`
+- Opções:
+  - `JARVIS` — "Clássico Tony Stark. Padrão se você não quiser pensar."
+  - `Atlas` — "Sugestão neutra, sólida."
+  - `Sofia` — "Sugestão em PT-BR."
+  - `Outro nome — vou dizer` — "Você define."
+  - `Manter como Claude` — "Sem apelido — usa só 'Claude'."
+
+Guarde a resposta como `nome_ia`. Se o usuário escolher "Outro nome", aguarde ele responder com o nome e use exatamente como ele escreveu.
+
+Default (se pular ou ambíguo): `Claude`.
+
+Esse nome será usado em:
+- Arquivo hub `{{nome_ia}}.md` na raiz do vault (Fase 7)
+- Confirmação final do setup
+- Identidade do agente nas sessões futuras
+
+Continue pra Fase 4.
 
 ---
 
@@ -615,12 +641,70 @@ tags: [identity, context, team]
 
 (Estruturas dos arquivos opcionais mesmas da versão anterior do setup — meta 90d, meta 1 ano, etc.)
 
-### 7.5 — Projetos ativos (ambos os modos)
+### 7.5 — Hub do agente (se `agente: sim`)
+
+Crie `{{nome_ia}}.md` na raiz do vault. Esse é o hub de identidade do agente — wikilinks daqui pra todo lugar relevante do vault. Substitua `{{nome_ia}}` pelo valor capturado na Fase 3.2.
+
+```markdown
+---
+type: context
+status: active
+date: YYYY-MM-DD
+tags: [hub, agente, ai-os, identidade]
+---
+
+> [!important] {{nome_ia}} — Camada de Inteligência
+> Agente IA pessoal de {{nome do usuário OU nome da empresa}}. Always on. Always aware. Always building.
+
+{{nome_ia}} opera a partir deste vault — seu AI OS. Não é uma ferramenta. Não é um chatbot. É um segundo cérebro que conhece todo projeto, todo caminho, e toda prioridade.
+
+## Identidade
+
+- **Operador:** {{wikilink pro nome do usuário OU pra organization.md em modo empresa}}
+- **Papel:** Parceiro de execução, segundo cérebro, construtor de sistemas
+- **Modo:** Direto, prático, sem floreio
+
+## Contexto que carrego em toda sessão
+
+- [[02 Context/me|Quem é o usuário]] (modo solo) OU [[02 Context/operator|Operador]] + [[02 Context/organization|Empresa]] (modo empresa)
+- [[02 Context/estrategia|Estratégia e objetivos]] — se existir
+- [[02 Context/marca|Marca e voz]] — se existir
+- [[01 Daily|Último daily]] — o que aconteceu na sessão anterior
+- [[AIOS/index|AIOS]] — skills, mapas, regras
+
+## O que eu gerencio
+
+- [[AIOS/project-map|Projetos ativos]] — tudo sendo construído agora
+- [[03 Intelligence|Intelligence]] — decisões, mercado, concorrentes, pesquisas
+- [[04 Resources|Recursos]] — outputs dos comandos, prompts, frameworks
+- [[knowledge/index|Knowledge hub]] — conhecimento permanente
+
+## Comandos que eu rodo
+
+Operacional: `/setup`, `/assistente`, `/importar-contexto`
+Escrita: `/escrever`, `/linkedin`, `/newsletter`, `/case-study`
+Web/SEO: `/landing-page`, `/seo-pagina`
+Crescimento: `/email-sequencia`, `/ads-google`, `/pesquisa`
+
+## Como me invocar
+
+Eu sou ativado automaticamente quando você abre o Claude Code neste vault — os hooks injetam meu contexto na primeira tool call.
+
+Pra trabalho específico: use os comandos `/` acima.
+Pra conversa direta: só fale comigo normalmente.
+Pra revisão ou retomar: `/assistente`.
+
+---
+
+*Hub criado em {{data}} via `/setup`. Edite este arquivo quando quiser ajustar minha identidade ou papel.*
+```
+
+### 7.6 — Projetos ativos (ambos os modos)
 
 Se houver projetos mencionados:
 - `03 Projects/{slug-do-projeto}/README.md` com overview + status + próximos passos.
 
-### 7.6 — Daily note (ambos os modos)
+### 7.7 — Daily note (ambos os modos)
 
 Cria `01 Daily/YYYY-MM-DD.md`:
 
@@ -642,22 +726,31 @@ tags: [daily, setup]
 - **Próximos passos:** {{1-2 ações concretas baseadas no objetivo principal}}
 ```
 
-### 7.7 — Confirmação
+### 7.8 — Confirmação
 
-Envie mensagem curta, sem floreio. Adapta ao modo:
+Envie mensagem curta, sem floreio. Adapta ao modo e usa o `nome_ia` se foi capturado.
 
-**Modo SOLO:**
-> "Pronto. Configurei seu vault em modo **solo**:
+**Modo SOLO com agente:**
+> "Pronto. Seu vault está rodando em modo **solo** com **{{nome_ia}}** como agente.
+> - `{{nome_ia}}.md` — hub de identidade do seu agente
 > - `02 Context/me.md` — você
 > - {{liste outros arquivos criados}}
 > - `01 Daily/[data].md` — nota do dia
 >
 > Próximo passo: {{1 ação concreta baseada no P3 ou contexto_ia}}.
 >
-> Quando quiser: `/escrever` (post), `/landing-page` (página), `/assistente` (dia a dia)."
+> Quando quiser: `/escrever` (post), `/landing-page` (página), `/assistente` (dia a dia). O {{nome_ia}} fica ativo a partir da próxima sessão."
 
-**Modo EMPRESA:**
-> "Pronto. Configurei seu vault em modo **empresa**:
+**Modo SOLO sem agente:**
+> "Pronto. Estrutura de pastas criada em modo **solo**:
+> - `02 Context/me.md` — você (placeholders)
+> - {{liste pastas criadas}}
+>
+> Quando quiser ativar agente IA persistente: rode `/setup` de novo."
+
+**Modo EMPRESA com agente:**
+> "Pronto. Seu vault está rodando em modo **empresa** com **{{nome_ia}}** como agente.
+> - `{{nome_ia}}.md` — hub de identidade do agente
 > - `02 Context/operator.md` — você como operador
 > - `02 Context/organization.md` — a empresa
 > - `02 Context/team.md` — estrutura do time
@@ -667,7 +760,14 @@ Envie mensagem curta, sem floreio. Adapta ao modo:
 >
 > Próximo passo: {{1 ação concreta baseada no P3}}.
 >
-> Quando quiser: `/escrever` (copy), `/landing-page` (página), `/case-study` (cliente), `/ads-google` (campanha), `/assistente` (dia a dia)."
+> Quando quiser: `/escrever` (copy), `/landing-page` (página), `/case-study` (cliente), `/ads-google` (campanha), `/assistente` (dia a dia). O {{nome_ia}} fica ativo a partir da próxima sessão."
+
+**Modo EMPRESA sem agente:**
+> "Pronto. Estrutura de pastas criada em modo **empresa**:
+> - `02 Context/operator.md`, `organization.md`, `team.md` (placeholders)
+> - `Departments/`, `Teams/`, `Onboarding/`
+>
+> Quando quiser ativar agente IA persistente: rode `/setup` de novo."
 
 Não liste cada campo. Não parabenize. Direto ao ponto.
 
