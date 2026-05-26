@@ -235,17 +235,108 @@ Se você usa o Gemini integrado ao Google Workspace, pode também buscar context
 
 Quando o usuário colar a resposta, identifique cada bloco (`## 1.`, `## 2.`, etc.) e extraia os dados estruturados. Não comente publicamente, só processe.
 
-Use esses dados na Fase 7 pra pré-preencher os arquivos antes de aplicar as respostas das 8 perguntas. Se uma pergunta da Fase 5 conflitar com a IA, prioridade pra resposta direta do usuário.
+Guarde em memória interna numa estrutura tipo:
+```
+contexto_ia = {
+  "1_identidade": "...",       // solo: nome, cidade. empresa: nome empresa, sede.
+  "2_profissao": "...",        // solo: cargo. empresa: a empresa em si.
+  "3_objetivos": "...",        // 90d / 1y / 3-5y
+  "4_como_trabalho": "...",    // ferramentas, rotina
+  "5_voz": "...",              // voz solo / voz da marca
+  "6_audiencia": "...",        // audiência / ICP
+  "7_canais": "...",
+  "8_desafios": "...",
+  // ... etc até bloco 11 (solo) ou 13 (empresa)
+}
+```
+
+Para cada bloco, marque como `tem_dado: true` se a IA preencheu com conteúdo substantivo, ou `tem_dado: false` se devolveu "sem dados" ou ficou vazio.
+
+**Esses dados drive a Fase 5 — não pergunte de novo o que a IA já entregou.**
 
 ---
 
-## Fase 5 — 8 perguntas (uma por vez via AskUserQuestion)
+## Fase 5 — 8 perguntas (smart-skip baseado em `contexto_ia`)
 
 > ⚠️ **ANTES DE COMEÇAR ESTA FASE:** confirme internamente qual `modo` foi capturado na Fase 2. Existem 2 versões completas das 8 perguntas — **Versão SOLO** ou **Versão EMPRESA**. Use só uma. NÃO faça 16 perguntas misturando as duas. Se o modo for `solo`, ignore completamente a seção "Versão modo EMPRESA". Se o modo for `empresa`, ignore completamente a seção "Versão modo SOLO".
 
-Faça uma pergunta por vez. Não agrupe. Não comente entre as perguntas — vá direto pra próxima.
+### Lógica de smart-skip
 
-**As perguntas mudam dependendo do `modo`. Use a versão correta.**
+Antes de cada pergunta P1-P8, **verifique o bloco correspondente em `contexto_ia`** (se a Fase 4 rodou):
+
+```
+Para cada pergunta P{n} (n de 1 a 8):
+
+  bloco = contexto_ia[bloco_correspondente_de_P{n}]
+
+  CASO 1 — bloco tem dado substantivo:
+    Mostre confirmação curta via AskUserQuestion:
+    
+    - Pergunta: "Da outra IA: '{{resumo do que a IA disse, máximo 1 linha}}'. Tá certo?"
+    - Header: mesmo header da pergunta original (ex: `Identidade`, `Profissão`, etc.)
+    - Opções:
+      - `Sim, está certo` — guarda valor da IA, segue pra próxima
+      - `Quase, deixa eu ajustar` — faz a pergunta original (P{n} normal)
+      - `Não, está errado — vou responder` — faz a pergunta original
+
+  CASO 2 — bloco vazio ou "sem dados":
+    Faz a pergunta original P{n} como descrito abaixo.
+
+  CASO 3 — Fase 4 não rodou (usuário pulou import de outra IA):
+    Faz todas as 8 perguntas originais normalmente.
+```
+
+**Mapeamento bloco → pergunta:**
+
+Modo SOLO:
+| Pergunta | Bloco da IA |
+|---|---|
+| P1 (nome + cidade) | Bloco 1 — Identidade |
+| P2 (profissão) | Bloco 2 — Profissão |
+| P3 (meta 90d) | Bloco 3 — Objetivos (curto prazo) |
+| P4 (ferramentas) | Bloco 4 — Como trabalho (ferramentas) |
+| P5 (voz) | Bloco 5 — Minha voz |
+| P6 (audiência) | Bloco 6 — Audiência |
+| P7 (canais) | Bloco 7 — Canais |
+| P8 (dor) | Bloco 8 — Desafios atuais |
+
+Modo EMPRESA:
+| Pergunta | Bloco da IA |
+|---|---|
+| P1 (empresa + sede) | Bloco 2 — A empresa |
+| P2 (produto) | Bloco 3 — Produto / serviço |
+| P3 (meta) | Bloco 5 — Objetivos (curto prazo) |
+| P4 (stack) | Bloco 6 — Como a empresa trabalha (stack) |
+| P5 (voz da marca) | Bloco 7 — Voz da marca |
+| P6 (ICP) | Bloco 8 — Cliente ideal |
+| P7 (canais) | Bloco 9 — Canais de mercado |
+| P8 (dor do negócio) | Bloco 10 — Desafios atuais do negócio |
+
+### Exemplo prático
+
+Se a IA respondeu no Bloco 1 (modo solo): *"Matheus Vizotto, Sydney, Austrália. Brasileiro morando na Austrália há 7 anos."*
+
+Em vez de perguntar P1 cego, mostre:
+
+> **Da outra IA:** "Matheus Vizotto, Sydney, Austrália"
+> **Tá certo?**
+> 1. Sim, está certo
+> 2. Quase, deixa eu ajustar
+> 3. Não, está errado — vou responder
+
+Se ele escolher "Sim", você guarda nome=Matheus Vizotto + cidade=Sydney e passa direto pra P2.
+
+Se ele escolher "Quase" ou "Não", aí sim você faz a pergunta original.
+
+**Princípio:** confirmar é rápido. Repetir o que a IA já disse é insulto à inteligência do inscrito.
+
+### Pulando totalmente o bloco
+
+Se a IA preencheu TODOS os 8 blocos relevantes com confiança e o usuário confirmou os 8, esta fase termina em 8 confirmações rápidas em vez de 8 perguntas abertas.
+
+Faça uma pergunta por vez (não agrupe). Não comente entre as perguntas. Vá direto pra próxima depois de cada confirmação ou resposta.
+
+**As perguntas mudam dependendo do `modo`. Use a versão correta abaixo.**
 
 ### Versão modo SOLO
 
