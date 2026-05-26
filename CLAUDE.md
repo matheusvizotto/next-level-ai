@@ -1,92 +1,145 @@
 # AI OS — Central de Comando
 
-Leia `02 Context/me.md` no início de cada sessão. Tudo sobre quem é o usuário e como trabalhar com ele está lá.
+Você é a IA operando neste vault. Tudo que precisa pra trabalhar bem está nos arquivos abaixo.
+
+Leia no início de cada sessão. Não anuncie que está lendo. Apenas absorva e responda como se já estivesse na conversa.
+
+---
+
+## Session Startup (em ordem)
+
+1. `knowledge/index.md` — Knowledge hub auto-injetado pelo hook `session-start.py`
+2. `AIOS/index.md` — Catálogo de skills e comandos disponíveis
+3. `AIOS/operating-rules.md` — Como você deve se comportar
+4. `02 Context/me.md` (modo solo) **ou** `02 Context/operator.md` + `organization.md` + `team.md` (modo empresa)
+5. Última nota em `01 Daily/` — O que aconteceu na sessão anterior
+
+O hook `session-start.py` faz a injeção automática na primeira tool call. Você não precisa pedir esses arquivos — eles chegam.
+
+---
+
+## Mapas do vault (load on demand)
+
+| Arquivo | Quando ler |
+|---|---|
+| `AIOS/Vault-Map.md` | Quando precisar saber onde algo vive ou onde rotear nova info |
+| `AIOS/knowledge-routing.md` | Quando estiver salvando algo e não tiver certeza onde colocar |
+| `AIOS/project-map.md` | Quando o usuário mencionar um projeto pelo nome |
+| `AIOS/operating-rules.md` | Quando precisar relembrar regras de comportamento |
 
 ---
 
 ## Estrutura do Vault
 
 ```
-00 Inbox/       — captura rápida, processar e mover
-01 Daily/       — notas diárias (YYYY-MM-DD.md)
-02 Context/     — identidade permanente (me.md, estrategia, marca)
-03 Projects/    — um subpasta por projeto ativo
-04 Resources/   — biblioteca: prompts, frameworks, templates
-prompts/        — 10 prompts prontos para uso imediato
+00 Inbox/        — Captura rápida, processar e mover
+01 Daily/        — Notas diárias (YYYY-MM-DD.md)
+02 Context/      — Identidade permanente
+03 Intelligence/ — Reuniões, decisões, concorrentes, mercado, pesquisas
+03 Projects/     — Um subpasta por projeto ativo
+04 Resources/    — Biblioteca: outputs dos comandos, prompts, frameworks
+05 Archives/     — Conteúdo finalizado e histórico
+AIOS/            — Camada portátil: skills, mapas, regras
+knowledge/       — Knowledge hub auto-loaded em cada sessão
+prompts/         — 10 prompts copy-paste prontos
 ```
 
-Cada pasta tem seu próprio `CLAUDE.md` com regras de roteamento específicas.
+Detalhes completos em `AIOS/Vault-Map.md`.
 
 ---
 
-## Roteamento de Informação
+## Roteamento Rápido
 
 | Tipo de conteúdo | Onde salvar |
 |---|---|
-| Identidade, preferências, estilo | `02 Context/me.md` |
-| Objetivos, estratégia | `02 Context/estrategia.md` |
-| Tom de voz, marca pessoal | `02 Context/marca.md` |
+| Identidade, preferências, estilo | `02 Context/me.md` (solo) / `operator.md` (empresa) |
+| Sobre a empresa (modo empresa) | `02 Context/organization.md` |
+| Sobre o time (modo empresa) | `02 Context/team.md` |
+| Objetivos, estratégia | `02 Context/strategy.md` ou `estrategia.md` |
+| Tom de voz, marca | `02 Context/brand.md` ou `marca.md` |
+| Decisão com raciocínio | `03 Intelligence/decisions/YYYY-MM-DD-{slug}.md` |
+| Notas de reunião | `03 Intelligence/meetings/{tipo}/` |
+| Pesquisa profunda | `03 Intelligence/research/` |
 | Projeto ativo | `03 Projects/{nome}/README.md` |
-| Recurso reutilizável | `04 Resources/` |
+| Outputs de comandos | `04 Resources/{categoria}/` |
 | Captura rápida | `00 Inbox/` |
 | Sessão do dia | `01 Daily/YYYY-MM-DD.md` |
+| Knowledge permanente (auto-loaded) | `knowledge/{dominio}.md` |
+| Conteúdo finalizado | `05 Archives/` |
+
+Tabela completa em `AIOS/knowledge-routing.md`.
 
 ---
 
-## Regras
+## Regras Gerais
 
-- Leia `02 Context/me.md` sempre na primeira mensagem da sessão
-- Use wikilinks `[[Nome da Nota]]` para toda referência interna — nunca links markdown
-- Todo arquivo criado recebe YAML frontmatter: `type`, `date`, `status`, `tags`
-- Nunca peça permissão para salvar — salve e informe onde
+Detalhes em `AIOS/operating-rules.md`. Resumo:
+
+- Leia os arquivos do Session Startup sempre na primeira mensagem
+- Use `[[wikilinks]]` pra TODA referência interna — nunca markdown links
+- Frontmatter YAML em todo arquivo: `type`, `date`, `status`, `tags`
+- **Nunca peça permissão pra salvar** — salve e informe onde
+- Quando o usuário corrige você, salve como regra permanente no `me.md`
 - Prefira editar notas existentes a criar novas
-- Ao capturar algo importante (decisão, projeto, insight): route imediatamente para a pasta certa
-
----
-
-## Prompts Disponíveis
-
-Os 10 prompts em `prompts/` cobrem os casos de uso mais comuns:
-
-| Prompt | Quando usar |
-|---|---|
-| `01-revisao-diaria.md` | Início ou fim do dia |
-| `02-notas-reuniao.md` | Após qualquer reunião |
-| `03-brief-conteudo.md` | Antes de criar conteúdo |
-| `04-rascunho-email.md` | Para escrever emails |
-| `05-plano-projeto.md` | Ao iniciar um projeto |
-| `06-pesquisa-concorrentes.md` | Análise de mercado |
-| `07-post-linkedin.md` | Posts no LinkedIn |
-| `08-revisao-semanal.md` | Revisão da semana |
-| `09-registro-decisao.md` | Documentar decisões |
-| `10-despejo-ideias.md` | Brainstorm livre |
+- Tudo em PT-BR (paths e frontmatter keys ficam em inglês)
+- Sem floreio: nunca "espero que esteja bem", "imagine", "no mundo de hoje", "vamos lá"
 
 ---
 
 ## Comandos
 
 **Operacional:**
-- `/setup` — Personaliza o vault: pergunta sobre agente, importa contexto de outra IA, faz 8 perguntas, preenche `me.md` com dados reais
-- `/assistente` — Operação diária: resume sessão, daily/weekly review, tasks, memória, transcrição de reunião, troca de output style
-- `/importar-contexto` — Traz contexto de outra IA (ChatGPT, Claude, Gemini, Perplexity) pro vault
+- `/setup` — Personaliza o vault: modo solo/empresa, agente, import de outra IA, 8 perguntas
+- `/assistente` — Operação diária: resume sessão, daily/weekly review, tasks, memória, reunião
+- `/importar-contexto` — Trazer contexto de outra IA depois do setup inicial
 
 **Escrita e conteúdo:**
-- `/escrever` — Texto curto na voz do usuário (post LinkedIn, email, headline, bio, caption) — gera 3 variações
-- `/linkedin` — Post LinkedIn dedicado: hooks testados, 4 estruturas, repurpose de YouTube/blog/transcrição
-- `/newsletter` — Edição completa de newsletter: 3 subjects, preheader, corpo estruturado, P.S., assinatura
-- `/case-study` — Case study completo: entrevista, estrutura, citações, números, lições
+- `/escrever` — Texto curto na sua voz — 3 variações
+- `/linkedin` — Post LinkedIn dedicado com hooks e estruturas
+- `/newsletter` — Edição completa de newsletter
+- `/case-study` — Case study estruturado
 
 **Web e SEO:**
-- `/landing-page` — Brief completo de landing page (positioning, headline, estrutura, copy seção por seção)
-- `/seo-pagina` — Auditoria SEO de uma URL: on-page, meta, schema, links, alt, relatório priorizado
+- `/landing-page` — Brief de landing page completo
+- `/seo-pagina` — Auditoria SEO de URL
 
 **Crescimento:**
-- `/email-sequencia` — Drip campaign: welcome, onboarding, nurture, win-back, pré-venda, pós-venda
-- `/ads-google` — Google Ads em 4 modos: audit, build, optimize, copy
-- `/pesquisa` — Deep research multi-fonte com citações verificáveis e tiers
+- `/email-sequencia` — Drip campaign automatizada
+- `/ads-google` — Google Ads (audit/build/optimize/copy)
+- `/pesquisa` — Deep research multi-fonte
 
 ---
 
-## Quer o sistema completo?
+## Hooks
 
-Este kit é o ponto de partida. Para a estrutura avançada com automações, múltiplos agentes e skill pack completo, acesse: https://matheusvizotto.com/pt-br/produtos/obsidian
+- `PreToolUse` → `.claude/hooks/session-start.py` — Injeta context files na primeira tool call
+- `PreCompact` → `.claude/hooks/session-capture.py` — Lembra de persistir sessão antes de comprimir
+
+Configurados em `.claude/settings.json`. Funcionam automaticamente — você não precisa invocar.
+
+---
+
+## Prompts Copy-Paste
+
+`prompts/` tem 10 prompts prontos pra colar no chat sem rodar comando. Usar pra casos simples:
+
+| Prompt | Quando usar |
+|---|---|
+| `01-revisao-diaria.md` | Início ou fim do dia (alternativa simples ao `/assistente`) |
+| `02-notas-reuniao.md` | Após reunião (alternativa ao `/assistente` modo meeting) |
+| `03-brief-conteudo.md` | Antes de criar conteúdo |
+| `04-rascunho-email.md` | E-mails profissionais |
+| `05-plano-projeto.md` | Iniciar projeto novo |
+| `06-pesquisa-concorrentes.md` | Análise rápida de concorrente |
+| `07-post-linkedin.md` | Post LinkedIn rápido (alternativa ao `/linkedin`) |
+| `08-revisao-semanal.md` | Revisão semanal |
+| `09-registro-decisao.md` | Documentar decisão |
+| `10-despejo-ideias.md` | Brainstorm livre |
+
+Comandos `/...` são mais robustos; prompts copy-paste são mais rápidos.
+
+---
+
+## Quer o sistema avançado?
+
+Este kit é a base. Para versão avançada com multi-agent swarms, scripts de automação, hooks customizados, agentes 24/7 e skill pack completo, acesse: https://matheusvizotto.com/pt-br/produtos/obsidian

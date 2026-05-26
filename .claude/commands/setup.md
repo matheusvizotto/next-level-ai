@@ -363,7 +363,7 @@ Combine todas as fontes nesta ordem de prioridade (a mais recente sobrescreve a 
 ### 7.1 — Folders base (sempre)
 
 ```bash
-mkdir -p "00 Inbox" "01 Daily" "02 Context" "03 Projects" "04 Resources"
+mkdir -p "00 Inbox" "01 Daily" "02 Context" "03 Projects" "04 Resources" "05 Archives"
 mkdir -p "03 Intelligence/meetings/team-standups"
 mkdir -p "03 Intelligence/meetings/client-calls"
 mkdir -p "03 Intelligence/meetings/one-on-ones"
@@ -371,8 +371,14 @@ mkdir -p "03 Intelligence/meetings/general"
 mkdir -p "03 Intelligence/competitors"
 mkdir -p "03 Intelligence/market"
 mkdir -p "03 Intelligence/decisions"
+mkdir -p "03 Intelligence/research"
 mkdir -p "03 Intelligence/archive"
+mkdir -p "AIOS/blueprint"
+mkdir -p "knowledge"
+mkdir -p ".claude/hooks"
 ```
+
+**Importante:** o repo já vem com `AIOS/`, `knowledge/` e `.claude/hooks/` populados. Os `mkdir -p` acima só garantem que existem se o vault foi clonado num lugar incomum.
 
 ### 7.2 — Folders extras se `modo: empresa`
 
