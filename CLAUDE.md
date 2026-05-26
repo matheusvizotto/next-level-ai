@@ -65,7 +65,10 @@ Os 10 prompts em `prompts/` cobrem os casos de uso mais comuns:
 
 ## Comandos
 
-- `/setup` — Personaliza o vault para você: 6 perguntas + busca de contexto online + preenche `me.md` com dados reais
+- `/setup` — Personaliza o vault: pergunta sobre agente, importa contexto de outra IA, faz 8 perguntas, preenche `me.md` com dados reais
+- `/landing-page` — Brief completo de landing page (positioning, headline, estrutura, copy seção por seção)
+- `/escrever` — Texto curto na voz do usuário (post LinkedIn, email, headline, bio, caption) — gera 3 variações
+- `/importar-contexto` — Traz contexto de outra IA (ChatGPT, Claude, Gemini) pro vault — atualiza `me.md` com profundidade
 
 ---
 

@@ -69,6 +69,32 @@ Exemplo: *Sou gerente de marketing em uma empresa de SaaS B2B. Cuido de geraçã
 
 ---
 
+## Audiência
+
+**Quem eu atendo profissionalmente:**
+{{Ex: Times de marketing B2B em empresas SaaS de 50-500 funcionários}}
+
+**Quem é meu público de conteúdo (se eu crio conteúdo):**
+{{Ex: Profissionais brasileiros de marketing e produto que estão começando a usar IA na rotina}}
+
+**Perfil resumido (1 frase):**
+{{Ex: Pessoas técnicas o suficiente pra rodar uma automação, mas sem tempo pra estudar do zero.}}
+
+---
+
+## Canais
+
+**Onde eu publico ou me comunico profissionalmente:**
+
+| Canal | Foco | Frequência |
+|---|---|---|
+| {{Ex: LinkedIn}} | {{Ex: Posts de aprendizado prático com IA}} | {{Ex: 3x por semana}} |
+| {{Ex: Newsletter}} | {{Ex: Reflexão semanal + tutorial}} | {{Ex: Sextas}} |
+
+Se não criar conteúdo, deletar esta seção inteira.
+
+---
+
 ## Tom de Voz (para criação de conteúdo)
 
 **Minha voz é:**
@@ -81,7 +107,7 @@ Exemplo: *Sou gerente de marketing em uma empresa de SaaS B2B. Cuido de geraçã
 {{Ex: "game-changer", "revolucionário", "disruptivo"}}
 
 **Referência de estilo:**
-{{Ex: Escrevo parecido com o {{NOME}} — veja examples em 04 Resources/voz/}}
+{{Ex: Escrevo parecido com o {{NOME}} — exemplos em 04 Resources/voz/}}
 
 ---
 

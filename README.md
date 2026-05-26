@@ -1,4 +1,4 @@
-# AI OS Starter Kit
+# Next Level AI — Starter Kit
 
 **por Matheus Vizotto** · [Instagram](https://instagram.com/matheusvizotto) · [matheusvizotto.com](https://matheusvizotto.com)
 
@@ -12,15 +12,20 @@
 ## O que está incluído
 
 ```
-ai-os-starter-kit/
-├── CLAUDE.md           → Contexto para o Claude (personalize com seus dados)
-├── me.md               → Seu perfil de identidade (lido por qualquer IA)
-├── 00 Inbox/           → Zona de captura
-├── 01 Daily/           → Notas de sessão e diário
-├── 02 Context/         → Contexto permanente (você, estratégia, marca)
-├── 03 Projects/        → Projetos ativos
-├── 04 Resources/       → Biblioteca pessoal (prompts, frameworks, referências)
-└── prompts/            → 10 prompts prontos para usar agora
+next-level-ai/
+├── .claude/
+│   └── commands/
+│       ├── setup.md              → Personalização inicial completa
+│       ├── landing-page.md       → Brief de landing page
+│       ├── escrever.md           → Texto curto na sua voz
+│       └── importar-contexto.md  → Trazer contexto de outra IA
+├── CLAUDE.md                     → Contexto para o Claude (auto-loaded)
+├── 00 Inbox/                     → Zona de captura
+├── 01 Daily/                     → Notas de sessão e diário
+├── 02 Context/                   → Identidade permanente (me.md, estratégia, marca)
+├── 03 Projects/                  → Projetos ativos
+├── 04 Resources/                 → Biblioteca pessoal (prompts, textos, landing pages)
+└── prompts/                      → 10 prompts copy-paste prontos
 ```
 
 ---
@@ -30,7 +35,7 @@ ai-os-starter-kit/
 ### Passo 1 — Clone o repositório
 
 ```bash
-git clone https://github.com/matheusvizotto/ai-os-starter-kit.git meu-vault
+git clone https://github.com/matheusvizotto/next-level-ai.git meu-vault
 cd meu-vault
 ```
 
@@ -40,25 +45,36 @@ cd meu-vault
 - Clique em "Open folder as vault"
 - Selecione a pasta `meu-vault`
 
-### Passo 3 — Personalize o `me.md`
+### Passo 3 — Rode `/setup` no Claude Code
 
-Abra o arquivo `me.md` e preencha as lacunas com suas informações. Isso é o que a IA vai ler para entender quem você é.
+```bash
+claude
+```
 
----
-
-## Como usar com Claude Code
-
-1. Abra o terminal dentro da pasta do vault
-2. Execute `claude` para iniciar o Claude Code
-3. A IA vai ler o `CLAUDE.md` automaticamente e já sabe quem você é
-
-**Comandos disponíveis após o setup:**
-- `/obsidian` — Constrói o vault completo personalizado (versão completa)
-- Use os prompts da pasta `prompts/` diretamente no chat
+Dentro do Claude Code, rode `/setup`. Ele vai:
+1. Perguntar se você quer um agente persistente
+2. Oferecer importar contexto de outra IA (ChatGPT, Claude, Gemini)
+3. Fazer 8 perguntas curtas
+4. Preencher seu `me.md` com dados reais (não placeholders)
 
 ---
 
-## Os 10 prompts incluídos
+## Comandos disponíveis
+
+| Comando | O que faz |
+|---|---|
+| `/setup` | Personalização inicial completa do vault |
+| `/landing-page` | Brief completo de landing page (positioning, headline, seções, copy) |
+| `/escrever` | Escreve texto curto na sua voz (post LinkedIn, email, headline, bio, caption) |
+| `/importar-contexto` | Traz contexto de outra IA pro vault — atualiza `me.md` com profundidade |
+
+Cada comando funciona em PT-BR por padrão, mas detecta o idioma da sua mensagem e adapta.
+
+---
+
+## Os 10 prompts copy-paste
+
+Pra quando você quer só colar no chat sem rodar comando:
 
 | # | Arquivo | Para que serve |
 |---|---------|---------------|
@@ -75,18 +91,12 @@ Abra o arquivo `me.md` e preencha as lacunas com suas informações. Isso é o q
 
 ---
 
-## Quer o sistema completo?
+## Fluxo recomendado pra primeira semana
 
-Este kit é o ponto de partida. O sistema completo inclui:
-
-- Estrutura de vault avançada com 40+ skills para Claude Code
-- Agente de IA configurado para sua rotina
-- Hooks de automação (notas diárias, captura de reuniões, indexação do vault)
-- Skill pack completo para marketing, conteúdo, SEO, projetos
-
-**Acesse o vault completo:** [github.com/matheusvizotto/build-with-matt](https://github.com/matheusvizotto/build-with-matt)
-
-**Mentorias e treinamentos:** [matheusvizotto.com](https://matheusvizotto.com)
+1. **Dia 1** — Roda `/setup`. Se você usa ChatGPT, escolhe "Sim — uso ChatGPT" pra importar contexto profundo.
+2. **Dia 2** — Roda `/escrever` pra produzir 1 post LinkedIn. Vê se a voz do `me.md` está acertada — ajusta se precisar.
+3. **Dia 3** — Roda `/landing-page` pra mapear sua próxima oferta.
+4. **Resto da semana** — Usa os prompts copy-paste em `prompts/` pro dia a dia. No fim da semana, revisão.
 
 ---
 
