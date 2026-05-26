@@ -16,15 +16,24 @@ next-level-ai/
 ├── .claude/
 │   └── commands/
 │       ├── setup.md              → Personalização inicial completa
-│       ├── landing-page.md       → Brief de landing page
+│       ├── assistente.md         → Operação diária (sessões, revisões, tasks)
+│       ├── importar-contexto.md  → Trazer contexto de outra IA
 │       ├── escrever.md           → Texto curto na sua voz
-│       └── importar-contexto.md  → Trazer contexto de outra IA
+│       ├── linkedin.md           → Post LinkedIn dedicado
+│       ├── newsletter.md         → Edição de newsletter completa
+│       ├── case-study.md         → Case study estruturado
+│       ├── landing-page.md       → Brief de landing page
+│       ├── seo-pagina.md         → Auditoria SEO de URL
+│       ├── email-sequencia.md    → Drip campaign automatizada
+│       ├── ads-google.md         → Google Ads (audit/build/optimize/copy)
+│       └── pesquisa.md           → Deep research multi-fonte
 ├── CLAUDE.md                     → Contexto para o Claude (auto-loaded)
 ├── 00 Inbox/                     → Zona de captura
 ├── 01 Daily/                     → Notas de sessão e diário
 ├── 02 Context/                   → Identidade permanente (me.md, estratégia, marca)
 ├── 03 Projects/                  → Projetos ativos
-├── 04 Resources/                 → Biblioteca pessoal (prompts, textos, landing pages)
+├── 03 Intelligence/              → Pesquisas, decisões, reuniões, market intel
+├── 04 Resources/                 → Biblioteca pessoal (textos, cases, ads, SEO)
 └── prompts/                      → 10 prompts copy-paste prontos
 ```
 
@@ -61,14 +70,39 @@ Dentro do Claude Code, rode `/setup`. Ele vai:
 
 ## Comandos disponíveis
 
+### Operacional
+
 | Comando | O que faz |
 |---|---|
 | `/setup` | Personalização inicial completa do vault |
-| `/landing-page` | Brief completo de landing page (positioning, headline, seções, copy) |
-| `/escrever` | Escreve texto curto na sua voz (post LinkedIn, email, headline, bio, caption) |
-| `/importar-contexto` | Traz contexto de outra IA pro vault — atualiza `me.md` com profundidade |
+| `/assistente` | Operação diária — resume sessão, revisão diária/semanal, tasks, memória, reunião |
+| `/importar-contexto` | Traz contexto de outra IA (ChatGPT, Claude, Gemini, Perplexity) |
 
-Cada comando funciona em PT-BR por padrão, mas detecta o idioma da sua mensagem e adapta.
+### Escrita e conteúdo
+
+| Comando | O que faz |
+|---|---|
+| `/escrever` | Texto curto na sua voz — 3 variações (post LinkedIn, email, headline, bio, caption) |
+| `/linkedin` | Post LinkedIn dedicado com hooks testados, 4 estruturas, repurpose de YT/blog |
+| `/newsletter` | Edição completa de newsletter — 3 subjects, corpo estruturado, P.S. |
+| `/case-study` | Case study estruturado — entrevista, citações, números, lições |
+
+### Web e SEO
+
+| Comando | O que faz |
+|---|---|
+| `/landing-page` | Brief de landing page completo (positioning, headline, copy seção por seção) |
+| `/seo-pagina` | Auditoria SEO de uma URL — on-page, meta, schema, relatório priorizado |
+
+### Crescimento
+
+| Comando | O que faz |
+|---|---|
+| `/email-sequencia` | Drip campaign — welcome, onboarding, nurture, win-back, pré-venda |
+| `/ads-google` | Google Ads — audit, build, optimize, copy |
+| `/pesquisa` | Deep research multi-fonte com citações verificáveis |
+
+Todos os comandos funcionam em PT-BR por padrão, mas detectam o idioma da sua mensagem e adaptam.
 
 ---
 
@@ -93,10 +127,33 @@ Pra quando você quer só colar no chat sem rodar comando:
 
 ## Fluxo recomendado pra primeira semana
 
-1. **Dia 1** — Roda `/setup`. Se você usa ChatGPT, escolhe "Sim — uso ChatGPT" pra importar contexto profundo.
-2. **Dia 2** — Roda `/escrever` pra produzir 1 post LinkedIn. Vê se a voz do `me.md` está acertada — ajusta se precisar.
-3. **Dia 3** — Roda `/landing-page` pra mapear sua próxima oferta.
-4. **Resto da semana** — Usa os prompts copy-paste em `prompts/` pro dia a dia. No fim da semana, revisão.
+1. **Dia 1 — Setup**
+   - Roda `/setup`. Se você usa ChatGPT, escolhe "Sim — uso ChatGPT" pra importar contexto profundo
+   - Revisa `02 Context/me.md` e ajusta o que não bate
+
+2. **Dia 2 — Primeiro conteúdo**
+   - Roda `/linkedin` pra produzir 1 post completo
+   - Avalia se a voz está acertada — ajusta `me.md` se precisar
+
+3. **Dia 3 — Sua oferta**
+   - Roda `/landing-page` pra mapear seu produto ou serviço principal
+   - Salva em `04 Resources/landing-pages/`
+
+4. **Dia 4 — Captação**
+   - Roda `/email-sequencia` modo "Welcome" pra quando alguém entrar na sua lista
+   - Roda `/seo-pagina` na URL da landing pra ver gaps
+
+5. **Dia 5 — Newsletter ou case**
+   - Se você manda newsletter: `/newsletter`
+   - Se você quer documentar caso: `/case-study`
+
+6. **Dia 6 — Pesquisa estratégica**
+   - Roda `/pesquisa` sobre algo importante (concorrente, tendência, ferramenta)
+
+7. **Dia 7 — Revisão**
+   - Roda `/assistente` e pede "revisão semanal" — fecha a semana com clareza
+
+Depois disso, `/assistente` vira o comando principal do dia a dia. Os outros comandos viram especialistas que você chama quando precisa.
 
 ---
 

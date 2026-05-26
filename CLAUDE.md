@@ -65,10 +65,25 @@ Os 10 prompts em `prompts/` cobrem os casos de uso mais comuns:
 
 ## Comandos
 
+**Operacional:**
 - `/setup` — Personaliza o vault: pergunta sobre agente, importa contexto de outra IA, faz 8 perguntas, preenche `me.md` com dados reais
-- `/landing-page` — Brief completo de landing page (positioning, headline, estrutura, copy seção por seção)
+- `/assistente` — Operação diária: resume sessão, daily/weekly review, tasks, memória, transcrição de reunião, troca de output style
+- `/importar-contexto` — Traz contexto de outra IA (ChatGPT, Claude, Gemini, Perplexity) pro vault
+
+**Escrita e conteúdo:**
 - `/escrever` — Texto curto na voz do usuário (post LinkedIn, email, headline, bio, caption) — gera 3 variações
-- `/importar-contexto` — Traz contexto de outra IA (ChatGPT, Claude, Gemini) pro vault — atualiza `me.md` com profundidade
+- `/linkedin` — Post LinkedIn dedicado: hooks testados, 4 estruturas, repurpose de YouTube/blog/transcrição
+- `/newsletter` — Edição completa de newsletter: 3 subjects, preheader, corpo estruturado, P.S., assinatura
+- `/case-study` — Case study completo: entrevista, estrutura, citações, números, lições
+
+**Web e SEO:**
+- `/landing-page` — Brief completo de landing page (positioning, headline, estrutura, copy seção por seção)
+- `/seo-pagina` — Auditoria SEO de uma URL: on-page, meta, schema, links, alt, relatório priorizado
+
+**Crescimento:**
+- `/email-sequencia` — Drip campaign: welcome, onboarding, nurture, win-back, pré-venda, pós-venda
+- `/ads-google` — Google Ads em 4 modos: audit, build, optimize, copy
+- `/pesquisa` — Deep research multi-fonte com citações verificáveis e tiers
 
 ---
 
