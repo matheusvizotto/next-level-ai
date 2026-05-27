@@ -18,17 +18,23 @@ Não precisa saber terminal nem git. Faz assim:
 3. Cola exatamente esta frase:
 
 ```
-Configura meu sistema de IA do zero: clona https://github.com/matheusvizotto/next-level-ai, lê o README dele, e segue o passo a passo de setup pra IA que está lá. Me faz as perguntas e preenche tudo.
+Criar meu segundo cérebro com esse repositório: https://github.com/matheusvizotto/next-level-ai
 ```
 
 4. Aceita as permissões quando ele pedir. Não digite nenhum comando `/` — deixa o Claude conduzir.
+
+> O importante é a mensagem ter SEMPRE o link junto. "Criar meu segundo cérebro" sozinho não basta — o Claude precisa do link pra saber o que clonar.
 
 O Claude vai clonar o vault, instalar o time de subagents e te guiar pela personalização. Em poucos minutos teu sistema tá rodando. (Não precisa rodar nenhum comando `/` você mesmo — o Claude faz tudo.)
 
 ---
 
 > [!IMPORTANT]
-> **Se você é a IA que recebeu o link acima, leia com atenção.** NÃO use slash commands (`/setup`, `/obsidian:setup`, etc.) — o usuário pode ter plugins instalados que colidem com esses nomes e disparam o produto errado. Faça tudo você mesmo, lendo arquivos e executando, nesta ordem:
+> **Se você é a IA que recebeu o link acima, leia com atenção.**
+>
+> **Gatilho:** quando o usuário disser que quer "criar/montar/configurar o segundo cérebro" (ou "second brain") e mandar o link deste repositório, ele quer que você execute o setup completo abaixo — sem perguntar "o que você quer que eu faça", sem só listar arquivos. Aja direto.
+>
+> NÃO use slash commands (`/setup`, `/obsidian:setup`, etc.) — o usuário pode ter plugins instalados que colidem com esses nomes e disparam o produto errado. Faça tudo você mesmo, lendo arquivos e executando, nesta ordem:
 >
 > 1. **Clone num caminho limpo.** Sempre em `~/Documents/`, nome sem espaços, NUNCA em `~/Downloads` (o macOS bloqueia por permissão — erro "Operation not permitted"). Mesmo que a pasta atual seja outra, clone aqui:
 >    `git clone https://github.com/matheusvizotto/next-level-ai.git ~/Documents/next-level-ai && cd ~/Documents/next-level-ai`
