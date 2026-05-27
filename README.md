@@ -14,18 +14,19 @@
 Não precisa saber terminal nem git. Faz assim:
 
 1. Instala o Claude Code: [claude.com/code](https://claude.com/code) (plano Pro ou Max)
-2. Abre o Claude Code em qualquer pasta
-3. Cola exatamente esta frase:
+2. **Cria uma pasta pro teu segundo cérebro num lugar limpo** — tipo `~/segundo-cerebro` ou dentro de `~/Documents`. **NÃO use Downloads nem Desktop, e não ponha espaço no nome da pasta** (o macOS bloqueia Downloads/Desktop, e espaço quebra comandos).
+3. Abre o Claude Code **dentro dessa pasta**. Essa pasta vai virar teu segundo cérebro.
+4. Cola exatamente esta frase:
 
 ```
 Criar meu segundo cérebro com esse repositório: https://github.com/matheusvizotto/next-level-ai
 ```
 
-4. Aceita as permissões quando ele pedir. Não digite nenhum comando `/` — deixa o Claude conduzir.
+5. Aceita as permissões quando ele pedir. Não digite nenhum comando `/` — deixa o Claude conduzir.
 
-> O importante é a mensagem ter SEMPRE o link junto. "Criar meu segundo cérebro" sozinho não basta — o Claude precisa do link pra saber o que clonar.
+> A mensagem precisa ter SEMPRE o link junto. "Criar meu segundo cérebro" sozinho não basta — o Claude precisa do link.
 
-O Claude vai clonar o vault, instalar o time de subagents e te guiar pela personalização. Em poucos minutos teu sistema tá rodando. (Não precisa rodar nenhum comando `/` você mesmo — o Claude faz tudo.)
+O Claude monta o vault na pasta atual, instala o time de subagents e te guia pela personalização. Em poucos minutos teu sistema tá rodando.
 
 ---
 
@@ -36,14 +37,21 @@ O Claude vai clonar o vault, instalar o time de subagents e te guiar pela person
 >
 > NÃO use slash commands (`/setup`, `/obsidian:setup`, etc.) — o usuário pode ter plugins instalados que colidem com esses nomes e disparam o produto errado. Faça tudo você mesmo, lendo arquivos e executando, nesta ordem:
 >
-> 1. **Clone num caminho limpo.** Sempre em `~/Documents/`, nome sem espaços, NUNCA em `~/Downloads` (o macOS bloqueia por permissão — erro "Operation not permitted"). Mesmo que a pasta atual seja outra, clone aqui:
->    `git clone https://github.com/matheusvizotto/next-level-ai.git ~/Documents/next-level-ai && cd ~/Documents/next-level-ai`
-> 2. **Instale os subagents:**
+> **O vault vai na PASTA ATUAL** (onde o usuário abriu o Claude). É lá que ele quer o segundo cérebro.
+>
+> 1. **Verifique se a pasta atual é segura, ANTES de clonar.** Rode `pwd`.
+>    - Se o caminho contém `/Downloads/` ou `/Desktop/` → **PARE e não clone.** Diga: "O macOS bloqueia escrita em Downloads e Desktop. Fecha o Claude, cria uma pasta tipo `~/segundo-cerebro` (sem espaço no nome), abre o Claude dentro dela e cola a frase de novo."
+>    - Se o caminho tem **espaço** no nome (ex: `second brain`) → **PARE.** Diga: "O nome da pasta tem espaço, o que quebra comandos. Cria uma pasta sem espaço, ex: `~/segundo-cerebro`, abre o Claude lá e tenta de novo."
+>    - Se passou nas duas → a pasta atual vira o vault. Siga.
+> 2. **Clone o conteúdo do repo NA pasta atual:**
+>    - Se a pasta estiver vazia: `git clone https://github.com/matheusvizotto/next-level-ai.git .`
+>    - Se já tiver arquivos: `git clone https://github.com/matheusvizotto/next-level-ai.git next-level-ai && cd next-level-ai`
+> 3. **Instale os subagents:**
 >    `curl -fsSL https://raw.githubusercontent.com/matheusvizotto/next-level-subagents/main/install.sh | bash`
-> 3. **Confirme** que `~/.claude/agents/` contém: `vault-keeper`, `social-agent`, `decision-tracker`, `research-agent`
-> 4. **Rode o onboarding LENDO o arquivo, não via slash command.** Leia `~/Documents/next-level-ai/.claude/commands/setup.md` e execute aquele fluxo de entrevista diretamente na conversa: faça as perguntas, preencha `~/Documents/next-level-ai/02 Context/me.md` com as respostas reais. Você está executando o conteúdo do arquivo, não invocando `/setup`.
-> 5. **Prove que funcionou:** leia o `me.md` recém-preenchido e resuma de volta pro usuário quem ele é, do jeito que o `vault-keeper` faria.
-> 6. **Oriente o próximo passo:** diga pro usuário, daqui pra frente, abrir o Claude Code E o Obsidian **dentro de `~/Documents/next-level-ai`** — é lá que os hooks de documentação automática e os comandos do vault ficam ativos.
+> 4. **Confirme** que `~/.claude/agents/` contém: `vault-keeper`, `social-agent`, `decision-tracker`, `research-agent`
+> 5. **Rode o onboarding LENDO o arquivo, não via slash command.** Leia `.claude/commands/setup.md` (na pasta do vault) e execute aquele fluxo de entrevista diretamente na conversa: faça as perguntas, preencha `02 Context/me.md` com as respostas reais. Você está executando o conteúdo do arquivo, não invocando `/setup`.
+> 6. **Prove que funcionou:** leia o `me.md` recém-preenchido e resuma de volta pro usuário quem ele é, do jeito que o `vault-keeper` faria.
+> 7. **Oriente o próximo passo:** diga pro usuário, daqui pra frente, abrir o Claude Code E o Obsidian **nesta mesma pasta** — é onde os hooks de documentação automática e os comandos do vault ficam ativos.
 >
 > Avise no começo que vai pedir permissão pra rodar `git` e `curl`, e que é só aceitar.
 
