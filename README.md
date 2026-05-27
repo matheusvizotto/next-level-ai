@@ -23,23 +23,23 @@ Clona e configura esse repositório como meu vault: https://github.com/matheusvi
 
 4. Aceita as permissões quando ele pedir.
 
-O Claude vai clonar o vault, instalar o time de subagents e te guiar pelo `/setup`. Em poucos minutos teu sistema tá rodando.
+O Claude vai clonar o vault, instalar o time de subagents e te guiar pela personalização. Em poucos minutos teu sistema tá rodando. (Não precisa rodar nenhum comando `/` você mesmo — o Claude faz tudo.)
 
 ---
 
-> [!NOTE]
-> **Se você é a IA que recebeu o link acima**, siga exatamente esta ordem:
+> [!IMPORTANT]
+> **Se você é a IA que recebeu o link acima, leia com atenção.** NÃO use slash commands (`/setup`, `/obsidian:setup`, etc.) — o usuário pode ter plugins instalados que colidem com esses nomes e disparam o produto errado. Faça tudo você mesmo, lendo arquivos e executando, nesta ordem:
 >
-> 1. Pergunte ao usuário em qual pasta ele quer o vault (ou use `~/Documents/`). Clone lá:
->    `git clone https://github.com/matheusvizotto/next-level-ai.git meu-vault && cd meu-vault`
-> 2. Instale os subagents:
+> 1. **Clone num caminho limpo.** Sempre em `~/Documents/`, nome sem espaços, NUNCA em `~/Downloads` (o macOS bloqueia por permissão — erro "Operation not permitted"). Mesmo que a pasta atual seja outra, clone aqui:
+>    `git clone https://github.com/matheusvizotto/next-level-ai.git ~/Documents/next-level-ai && cd ~/Documents/next-level-ai`
+> 2. **Instale os subagents:**
 >    `curl -fsSL https://raw.githubusercontent.com/matheusvizotto/next-level-subagents/main/install.sh | bash`
-> 3. Confirme que `~/.claude/agents/` contém: `vault-keeper`, `social-agent`, `decision-tracker`, `research-agent`
-> 4. Diga ao usuário pra reabrir o Claude Code **dentro da pasta `meu-vault`** (pra carregar os comandos e hooks) e abrir essa mesma pasta como vault no Obsidian
-> 5. Rode o fluxo do comando `/setup` (instruções em `.claude/commands/setup.md`) pra personalizar o `me.md`
-> 6. No final, prove que funcionou: peça pro `vault-keeper` resumir o que ele sabe sobre o usuário
+> 3. **Confirme** que `~/.claude/agents/` contém: `vault-keeper`, `social-agent`, `decision-tracker`, `research-agent`
+> 4. **Rode o onboarding LENDO o arquivo, não via slash command.** Leia `~/Documents/next-level-ai/.claude/commands/setup.md` e execute aquele fluxo de entrevista diretamente na conversa: faça as perguntas, preencha `~/Documents/next-level-ai/02 Context/me.md` com as respostas reais. Você está executando o conteúdo do arquivo, não invocando `/setup`.
+> 5. **Prove que funcionou:** leia o `me.md` recém-preenchido e resuma de volta pro usuário quem ele é, do jeito que o `vault-keeper` faria.
+> 6. **Oriente o próximo passo:** diga pro usuário, daqui pra frente, abrir o Claude Code E o Obsidian **dentro de `~/Documents/next-level-ai`** — é lá que os hooks de documentação automática e os comandos do vault ficam ativos.
 >
-> Avise o usuário que vai pedir permissão pra rodar `git` e `curl`, e que é só aceitar.
+> Avise no começo que vai pedir permissão pra rodar `git` e `curl`, e que é só aceitar.
 
 ---
 
