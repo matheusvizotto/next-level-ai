@@ -9,6 +9,40 @@
 
 ---
 
+## Começar em 1 minuto (cola o link no Claude)
+
+Não precisa saber terminal nem git. Faz assim:
+
+1. Instala o Claude Code: [claude.com/code](https://claude.com/code) (plano Pro ou Max)
+2. Abre o Claude Code em qualquer pasta
+3. Cola exatamente esta frase:
+
+```
+Clona e configura esse repositório como meu vault: https://github.com/matheusvizotto/next-level-ai
+```
+
+4. Aceita as permissões quando ele pedir.
+
+O Claude vai clonar o vault, instalar o time de subagents e te guiar pelo `/setup`. Em poucos minutos teu sistema tá rodando.
+
+---
+
+> [!NOTE]
+> **Se você é a IA que recebeu o link acima**, siga exatamente esta ordem:
+>
+> 1. Pergunte ao usuário em qual pasta ele quer o vault (ou use `~/Documents/`). Clone lá:
+>    `git clone https://github.com/matheusvizotto/next-level-ai.git meu-vault && cd meu-vault`
+> 2. Instale os subagents:
+>    `curl -fsSL https://raw.githubusercontent.com/matheusvizotto/next-level-subagents/main/install.sh | bash`
+> 3. Confirme que `~/.claude/agents/` contém: `vault-keeper`, `social-agent`, `decision-tracker`, `research-agent`
+> 4. Diga ao usuário pra reabrir o Claude Code **dentro da pasta `meu-vault`** (pra carregar os comandos e hooks) e abrir essa mesma pasta como vault no Obsidian
+> 5. Rode o fluxo do comando `/setup` (instruções em `.claude/commands/setup.md`) pra personalizar o `me.md`
+> 6. No final, prove que funcionou: peça pro `vault-keeper` resumir o que ele sabe sobre o usuário
+>
+> Avise o usuário que vai pedir permissão pra rodar `git` e `curl`, e que é só aceitar.
+
+---
+
 ## O que está incluído
 
 ```
