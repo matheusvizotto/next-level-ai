@@ -157,11 +157,40 @@ Depois disso, `/assistente` vira o comando principal do dia a dia. Os outros com
 
 ---
 
-## Quer aprender a usar isso do zero?
+## Adiciona o time de subagents
 
-Estou preparando um **programa de mentoria completo** — Claude Code, Obsidian, agentes de IA e vibe coding para profissionais brasileiros que querem trabalhar diferente.
+Esse vault é o cérebro. Os **subagents** são o time que trabalha em cima dele.
 
-👉 **[Entra na lista de espera](https://matheusvizotto.com)** — vagas limitadas para a primeira turma.
+Instala os 4 subagents grátis que rodam direto nessa estrutura de pastas:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/matheusvizotto/next-level-subagents/main/install.sh | bash
+```
+
+| Subagent | O que faz |
+|---|---|
+| `vault-keeper` | Lê esse vault e responde com contexto histórico |
+| `social-agent` | Rascunha respostas pra Telegram/Discord com contexto |
+| `decision-tracker` | Captura decisões em `03 Intelligence/decisions/` automaticamente |
+| `research-agent` | Auditoria de ads, copy, plano de mídia (fontes públicas) |
+
+Repo completo: [github.com/matheusvizotto/next-level-subagents](https://github.com/matheusvizotto/next-level-subagents)
+
+---
+
+## Imersão "Time de IA" — 06/06, 9h BRT
+
+Esse kit + os 4 subagents são a base, livres. Na imersão eu mostro o que não está aqui:
+
+- O subagent que edita vídeo sozinho
+- O coordinator orquestrando 5 subagents em paralelo
+- Subagents bônus
+- Customização pro teu trabalho específico
+- Acesso vitalício à comunidade onde isso continua crescendo
+
+**Sábado 06/06/2026, 9h BRT, online, R$ 297, 200 vagas.**
+
+**[Inscrever na imersão](https://matheusvizotto.com/imersao)**
 
 ---
 
