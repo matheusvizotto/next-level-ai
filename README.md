@@ -18,10 +18,10 @@ Não precisa saber terminal nem git. Faz assim:
 3. Cola exatamente esta frase:
 
 ```
-Clona e configura esse repositório como meu vault: https://github.com/matheusvizotto/next-level-ai
+Configura meu sistema de IA do zero: clona https://github.com/matheusvizotto/next-level-ai, lê o README dele, e segue o passo a passo de setup pra IA que está lá. Me faz as perguntas e preenche tudo.
 ```
 
-4. Aceita as permissões quando ele pedir.
+4. Aceita as permissões quando ele pedir. Não digite nenhum comando `/` — deixa o Claude conduzir.
 
 O Claude vai clonar o vault, instalar o time de subagents e te guiar pela personalização. Em poucos minutos teu sistema tá rodando. (Não precisa rodar nenhum comando `/` você mesmo — o Claude faz tudo.)
 
