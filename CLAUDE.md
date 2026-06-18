@@ -6,15 +6,17 @@ Leia no início de cada sessão. Não anuncie que está lendo. Apenas absorva e 
 
 ---
 
-## Session Startup (em ordem)
+## Session Startup (faça na primeira mensagem)
 
-1. `knowledge/index.md` — Knowledge hub auto-injetado pelo hook `session-start.py`
-2. `AIOS/index.md` — Catálogo de skills e comandos disponíveis
-3. `AIOS/operating-rules.md` — Como você deve se comportar
-4. `02 Context/me.md` (modo solo) **ou** `02 Context/operator.md` + `organization.md` + `team.md` (modo empresa)
-5. Última nota em `01 Daily/` — O que aconteceu na sessão anterior
+Leia estes arquivos no começo de cada sessão. Não anuncie, só absorva e responda:
 
-O hook `session-start.py` faz a injeção automática na primeira tool call. Você não precisa pedir esses arquivos — eles chegam.
+1. `02 Context/me.md` (modo solo) **ou** `02 Context/operator.md` + `organization.md` (modo empresa). Quem é o usuário.
+2. A nota mais recente em `01 Daily/`. O que aconteceu na sessão anterior.
+3. `AIOS/operating-rules.md`. Como você opera neste vault.
+4. `AIOS/index.md`. Skills e comandos disponíveis.
+5. `knowledge/index.md`. Conhecimento permanente.
+
+O hook `SessionStart` já injeta a identidade e o último daily no contexto automaticamente. Se você não recebeu esse bloco (por exemplo, Python não está instalado na máquina), leia os arquivos acima você mesmo antes de responder. É isso que garante que você sempre conecta ao vault, com ou sem hook.
 
 ---
 
@@ -90,8 +92,9 @@ Detalhes em `AIOS/operating-rules.md`. Resumo:
 
 **Operacional:**
 - `/setup` — Personaliza o vault: modo solo/empresa, agente, import de outra IA, 8 perguntas
-- `/assistente` — Operação diária: resume sessão, daily/weekly review, tasks, memória, reunião
-- `/importar-contexto` — Trazer contexto de outra IA depois do setup inicial
+- `/assistente`: operação diária, resume sessão, daily/weekly review, tasks, memória, reunião
+- `/organizar`: limpa o vault, roteia notas órfãs, conecta com wikilinks, arquiva redundância
+- `/importar-contexto`: trazer contexto de outra IA depois do setup inicial
 
 **Escrita e conteúdo:**
 - `/escrever` — Texto curto na sua voz — 3 variações
@@ -112,10 +115,13 @@ Detalhes em `AIOS/operating-rules.md`. Resumo:
 
 ## Hooks
 
-- `PreToolUse` → `.claude/hooks/session-start.py` — Injeta context files na primeira tool call
-- `PreCompact` → `.claude/hooks/session-capture.py` — Lembra de persistir sessão antes de comprimir
+Configurados em `.claude/settings.json`, rodam sozinhos (requerem `python3` no PATH):
 
-Configurados em `.claude/settings.json`. Funcionam automaticamente — você não precisa invocar.
+- `SessionStart` chama `.claude/hooks/session-start.py`: injeta identidade + último daily no contexto no início da sessão. O stdout do `SessionStart` entra no contexto do modelo. O evento `PreToolUse`, usado antes, NÃO injeta stdout no contexto, e era por isso que o agente parecia desconectado.
+- `SessionEnd` chama `.claude/hooks/session-end.py`: documentação automática OPT-IN, desligada por padrão. Pra ligar, crie o arquivo `AIOS/autodoc.enabled` (ou exporte `AIOS_AUTODOC=1`). Fica off por padrão pra não gastar token nem travar a saída da sessão.
+- `PreCompact` chama `.claude/hooks/session-capture.py`: lembra de persistir a sessão antes de comprimir.
+
+Sem Python, o vault e os comandos continuam funcionando. Só a injeção e o resumo automáticos ficam off, e a IA lê os arquivos do Session Startup manualmente.
 
 ---
 

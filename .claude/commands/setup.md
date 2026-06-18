@@ -340,17 +340,17 @@ Modo EMPRESA:
 
 ### Exemplo prático
 
-Se a IA respondeu no Bloco 1 (modo solo): *"Matheus Vizotto, Sydney, Austrália. Brasileiro morando na Austrália há 7 anos."*
+Se a IA respondeu no Bloco 1 (modo solo): *"Ana Ribeiro, Belo Horizonte, Brasil. Gerente de marketing há 5 anos."*
 
 Em vez de perguntar P1 cego, mostre:
 
-> **Da outra IA:** "Matheus Vizotto, Sydney, Austrália"
+> **Da outra IA:** "Ana Ribeiro, Belo Horizonte, Brasil"
 > **Tá certo?**
 > 1. Sim, está certo
 > 2. Quase, deixa eu ajustar
 > 3. Não, está errado — vou responder
 
-Se ele escolher "Sim", você guarda nome=Matheus Vizotto + cidade=Sydney e passa direto pra P2.
+Se ele escolher "Sim", você guarda nome=Ana Ribeiro + cidade=Belo Horizonte e passa direto pra P2.
 
 Se ele escolher "Quase" ou "Não", aí sim você faz a pergunta original.
 
@@ -681,7 +681,7 @@ tags: [hub, agente, ai-os, identidade]
 
 ## Comandos que eu rodo
 
-Operacional: `/setup`, `/assistente`, `/importar-contexto`
+Operacional: `/setup`, `/assistente`, `/organizar`, `/importar-contexto`
 Escrita: `/escrever`, `/linkedin`, `/newsletter`, `/case-study`
 Web/SEO: `/landing-page`, `/seo-pagina`
 Crescimento: `/email-sequencia`, `/ads-google`, `/pesquisa`

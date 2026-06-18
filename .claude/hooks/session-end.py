@@ -1,15 +1,20 @@
 #!/usr/bin/env python3
 """
-AI OS — Session End Hook (documentação 100% automática)
+AI OS Session End Hook (documentacao automatica OPT-IN)
 
-Dispara em SessionEnd. Lê o transcript da conversa inteira, resume via
-Claude headless (claude -p), e grava o resumo em 01 Daily/HOJE.md.
+Dispara em SessionEnd. Por padrao NAO faz nada (saida instantanea, zero custo).
+So roda se a documentacao automatica estiver LIGADA, evitando dois problemas que
+geravam reclamacao: travar a saida da sessao e gastar token do aluno em silencio.
 
-Não depende da IA da sessão lembrar de documentar. Garante que TODA
-conversa vira registro, mesmo curta.
+Como ligar a documentacao automatica:
+  - crie o arquivo `AIOS/autodoc.enabled` no vault, OU
+  - exporte a env var AIOS_AUTODOC=1
 
-Guard anti-recursão: a chamada headless do claude dispararia hooks de novo.
-A env var AIOS_DOCUMENTING=1 (setada no subprocess) faz os hooks saírem cedo.
+Quando ligada: le o transcript, resume via Claude headless (claude -p, timeout 60s)
+e grava em 01 Daily/HOJE.md. Se o resumo falhar, sai em silencio (nao escreve lixo).
+
+Guard anti-recursao: a chamada headless do claude dispara hooks de novo. A env var
+AIOS_DOCUMENTING=1 (setada no subprocess) faz os hooks sairem cedo.
 """
 import json
 import os
@@ -19,8 +24,22 @@ import sys
 from datetime import date, datetime
 from pathlib import Path
 
-# Se já estamos dentro de uma rodada de documentação, não faz nada (evita loop).
+# Nunca roda dentro da propria rodada de documentacao (evita loop).
 if os.environ.get("AIOS_DOCUMENTING") == "1":
+    sys.exit(0)
+
+# Vault root = pai de .claude/hooks/ (sem depender de env var)
+VAULT = Path(__file__).resolve().parent.parent.parent
+
+
+def autodoc_enabled():
+    if os.environ.get("AIOS_AUTODOC") == "1":
+        return True
+    return (VAULT / "AIOS" / "autodoc.enabled").exists()
+
+
+# OPT-IN: desligado por padrao. Saida instantanea, nada de claude -p.
+if not autodoc_enabled():
     sys.exit(0)
 
 
@@ -62,7 +81,7 @@ def extract_conversation(path, max_chars=120000):
         return ""
     convo = "\n\n".join(out)
     if len(convo) > max_chars:
-        convo = "(início truncado)\n\n" + convo[-max_chars:]
+        convo = "(inicio truncado)\n\n" + convo[-max_chars:]
     return convo
 
 
@@ -102,7 +121,7 @@ def summarize(convo):
             [claude, "-p", prompt],
             capture_output=True,
             text=True,
-            timeout=180,
+            timeout=60,
             env=env,
         )
         if result.returncode == 0 and result.stdout.strip():
@@ -112,27 +131,28 @@ def summarize(convo):
     return None
 
 
-def write_to_daily(vault, summary):
+def write_to_daily(summary):
     today = date.today().isoformat()
-    daily_dir = Path(vault) / "01 Daily"
-    daily_dir.mkdir(parents=True, exist_ok=True)
-    daily_path = daily_dir / f"{today}.md"
-    ts = datetime.now().strftime("%H:%M")
-    if not daily_path.exists():
-        daily_path.write_text(
-            f"---\ntype: daily\ndate: {today}\nstatus: active\ntags: [daily]\n---\n",
-            encoding="utf-8",
-        )
-    entry = f"\n\n## Sessao {ts}\n\n{summary}\n"
-    with open(daily_path, "a", encoding="utf-8") as f:
-        f.write(entry)
+    daily_dir = VAULT / "01 Daily"
+    try:
+        daily_dir.mkdir(parents=True, exist_ok=True)
+        daily_path = daily_dir / f"{today}.md"
+        ts = datetime.now().strftime("%H:%M")
+        if not daily_path.exists():
+            daily_path.write_text(
+                f"---\ntype: daily\ndate: {today}\nstatus: active\ntags: [daily]\n---\n",
+                encoding="utf-8",
+            )
+        entry = f"\n\n## Sessao {ts}\n\n{summary}\n"
+        with open(daily_path, "a", encoding="utf-8") as f:
+            f.write(entry)
+    except Exception:
+        pass
 
 
 def main():
     hook = read_hook_input()
     transcript_path = hook.get("transcript_path", "")
-    cwd = hook.get("cwd") or os.getcwd()
-    vault = os.environ.get("CLAUDE_PROJECT_DIR", cwd)
 
     if not transcript_path or not os.path.exists(transcript_path):
         sys.exit(0)
@@ -143,9 +163,10 @@ def main():
 
     summary = summarize(convo)
     if not summary:
-        summary = f"(Resumo automatico indisponivel nesta sessao. Transcript: {transcript_path})"
+        # Falhou: sai em silencio em vez de sujar o daily com placeholder.
+        sys.exit(0)
 
-    write_to_daily(vault, summary)
+    write_to_daily(summary)
 
 
 if __name__ == "__main__":

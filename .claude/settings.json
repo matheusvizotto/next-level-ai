@@ -1,8 +1,7 @@
 {
   "hooks": {
-    "PreToolUse": [
+    "SessionStart": [
       {
-        "matcher": ".*",
         "hooks": [
           {
             "type": "command",

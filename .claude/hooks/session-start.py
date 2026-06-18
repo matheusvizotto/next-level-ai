@@ -1,131 +1,136 @@
 #!/usr/bin/env python3
 """
-AI OS — Session Start Hook
+AI OS Session Start Hook
 
-Injeta arquivos de contexto central no início de cada sessão do Claude E
-garante que a nota diária de hoje exista, instruindo a IA a documentar.
+Injeta o contexto central do vault no inicio de cada sessao do Claude Code.
 
-Dispara em PreToolUse — só imprime na primeira tool call de cada sessão.
+IMPORTANTE: dispara no evento SessionStart. O stdout do SessionStart E injetado
+no contexto do modelo. O evento antigo (PreToolUse) NAO injeta stdout no contexto,
+por isso o agente parecia "nao conectado" mesmo com o hook rodando.
 
-Ordem de injeção:
-  1. knowledge/index.md       — Knowledge hub auto-loaded
-  2. AIOS/index.md            — Catálogo de skills e comandos
-  3. AIOS/operating-rules.md  — Como a IA opera neste vault
-  4. 02 Context/me.md         — Identidade (modo solo)
-     OU operator.md + organization.md + team.md (modo empresa)
-  5. nota mais recente em 01 Daily/  — Contexto da última sessão
-  6. Garante 01 Daily/HOJE.md + instrução de documentação
+Regras de robustez:
+- Output sempre abaixo de 10.000 caracteres (limite por hook). Teto de 9.000 aqui.
+- Sem dependencia de /tmp (nao existe em Windows nativo). SessionStart roda uma
+  vez por sessao, entao nao precisa de lock.
+- Leitura sempre em utf-8. Toda operacao de arquivo tolera falha sem quebrar.
+- O vault e detectado pela localizacao deste arquivo, sem paths absolutos.
 
-Path do vault é detectado automaticamente a partir da localização do hook.
+Mesmo que este hook falhe (sem python, por exemplo), o agente ainda conecta:
+o CLAUDE.md (sempre carregado pelo Claude Code) instrui a IA a ler estes arquivos.
 """
 import os
 import sys
 from datetime import date
 from pathlib import Path
 
-# Recursion guard: a captura automática de fim de sessão chama o claude headless,
-# que dispararia este hook de novo. Se estamos dentro de uma rodada de documentação, sai.
+# Guard anti-recursao: a documentacao automatica de fim de sessao chama
+# 'claude -p' headless, que dispara SessionStart de novo. Nessa rodada, sai.
 if os.environ.get("AIOS_DOCUMENTING") == "1":
     sys.exit(0)
 
-# Vault root = parent de .claude/hooks/
+# Consome o stdin do hook (JSON do SessionStart) sem depender dele.
+try:
+    sys.stdin.read()
+except Exception:
+    pass
+
+# Vault root = pai de .claude/hooks/
 VAULT = Path(__file__).resolve().parent.parent.parent
 
-STATIC_FILES = [
-    ("knowledge/index.md", "Knowledge Index"),
-    ("AIOS/index.md", "Skills Index"),
-    ("AIOS/operating-rules.md", "Operating Rules"),
-]
-
-IDENTITY_FILES_SOLO = [
-    ("02 Context/me.md", "Identidade"),
-]
-
-IDENTITY_FILES_EMPRESA = [
-    ("02 Context/operator.md", "Operador"),
-    ("02 Context/organization.md", "Empresa"),
-    ("02 Context/team.md", "Time"),
-]
+CHAR_BUDGET = 9000  # margem de seguranca sob o limite de 10k por hook
 
 
-def get_latest_daily(vault: Path):
-    """Retorna o arquivo de daily mais recente, ou None se não existir."""
-    daily_dir = vault / "01 Daily"
-    if not daily_dir.exists():
+def read_capped(rel_path, limit):
+    p = VAULT / rel_path
+    if not p.exists():
         return None
-    files = sorted(daily_dir.glob("????-??-??.md"), reverse=True)
-    if files:
-        return files[0].relative_to(vault)
-    return None
+    try:
+        text = p.read_text(encoding="utf-8")
+    except Exception:
+        return None
+    if len(text) > limit:
+        text = text[:limit] + "\n[... truncado, leia o arquivo inteiro se precisar ...]"
+    return text
 
 
-def detect_mode(vault: Path):
-    operator = vault / "02 Context" / "operator.md"
-    organization = vault / "02 Context" / "organization.md"
-    if operator.exists() and organization.exists():
-        return "empresa"
-    return "solo"
+def detect_mode():
+    op = VAULT / "02 Context" / "operator.md"
+    org = VAULT / "02 Context" / "organization.md"
+    return "empresa" if (op.exists() and org.exists()) else "solo"
 
 
-def ensure_today_daily(vault: Path):
-    """Cria 01 Daily/HOJE.md com frontmatter se ainda não existir."""
+def latest_daily():
+    d = VAULT / "01 Daily"
+    if not d.exists():
+        return None
+    files = sorted(d.glob("????-??-??.md"), reverse=True)
+    return files[0] if files else None
+
+
+def ensure_today_daily():
     today = date.today().isoformat()
-    daily_dir = vault / "01 Daily"
-    daily_dir.mkdir(parents=True, exist_ok=True)
-    daily_path = daily_dir / f"{today}.md"
-    if not daily_path.exists():
-        daily_path.write_text(
-            f"---\ntype: daily\ndate: {today}\nstatus: active\ntags: [daily]\n---\n",
-            encoding="utf-8",
-        )
+    d = VAULT / "01 Daily"
+    try:
+        d.mkdir(parents=True, exist_ok=True)
+        f = d / f"{today}.md"
+        if not f.exists():
+            f.write_text(
+                f"---\ntype: daily\ndate: {today}\nstatus: active\ntags: [daily]\n---\n",
+                encoding="utf-8",
+            )
+    except Exception:
+        pass
     return today
 
 
-# Lock por processo Claude — nova sessão = novo PID = novo lock
-lock = Path(f"/tmp/aios_session_{os.getppid()}.lock")
+header = "[AI OS Session Start] Voce e a IA pessoal que opera este vault. Contexto carregado abaixo.\n"
+parts = [header]
+used = len(header)
 
-if lock.exists():
-    sys.exit(0)
 
-lock.touch()
+def add(block):
+    global used
+    if used + len(block) < CHAR_BUDGET:
+        parts.append(block)
+        used += len(block)
 
-parts = ["[AI OS — Session Start]\n"]
 
-# Static files
-for rel_path, label in STATIC_FILES:
-    full_path = VAULT / rel_path
-    if full_path.exists():
-        parts.append(f"--- {label} ---\n{full_path.read_text()}\n")
-    else:
-        parts.append(f"[AI OS] {rel_path} não encontrado — rode /setup pra criar.\n")
+# 1. Identidade (prioridade maxima, e o que faz o agente "te conhecer")
+if detect_mode() == "empresa":
+    identity = [
+        ("02 Context/operator.md", "Operador", 2500),
+        ("02 Context/organization.md", "Empresa", 2500),
+    ]
+else:
+    identity = [("02 Context/me.md", "Identidade", 4000)]
 
-# Identity files baseados no modo
-mode = detect_mode(VAULT)
-identity_files = IDENTITY_FILES_EMPRESA if mode == "empresa" else IDENTITY_FILES_SOLO
+for rel, label, lim in identity:
+    txt = read_capped(rel, lim)
+    if txt:
+        add(f"--- {label} ({rel}) ---\n{txt}\n")
 
-for rel_path, label in identity_files:
-    full_path = VAULT / rel_path
-    if full_path.exists():
-        parts.append(f"--- {label} ---\n{full_path.read_text()}\n")
+# 2. Ultima sessao (continuidade)
+ld = latest_daily()
+if ld:
+    txt = read_capped(ld.relative_to(VAULT).as_posix(), 2000)
+    if txt:
+        add(f"--- Ultima Sessao ({ld.stem}) ---\n{txt}\n")
 
-# Latest daily
-latest_daily = get_latest_daily(VAULT)
-if latest_daily:
-    full_path = VAULT / latest_daily
-    parts.append(f"--- Última Sessão ({latest_daily.stem}) ---\n{full_path.read_text()}\n")
-
-# Garante o daily de hoje e instrui documentação
-today = ensure_today_daily(VAULT)
-parts.append(
-    f"""--- Documentação desta Sessão ---
-A nota de hoje existe em `01 Daily/{today}.md`.
-
-REGRA: esta conversa será documentada. Conforme trabalha:
-- Toda decisão real → registre com o subagent decision-tracker em `03 Intelligence/decisions/`
-- Info nova de projeto, correção ou aprendizado → roteie pro arquivo certo (veja AIOS/knowledge-routing.md)
-
-Ao final da sessão, um resumo automático será gravado em `01 Daily/{today}.md` pelo hook de fim de sessão. Você não precisa fazer isso manualmente, mas registre decisões importantes na hora pra não perder o contexto.
-"""
+# 3. Ponteiros pro resto (lidos sob demanda pela IA)
+add(
+    "--- Leia sob demanda ---\n"
+    "- AIOS/index.md (skills e comandos disponiveis)\n"
+    "- AIOS/operating-rules.md (como operar neste vault)\n"
+    "- AIOS/knowledge-routing.md (onde salvar cada coisa)\n"
+    "- knowledge/index.md (conhecimento permanente)\n"
 )
 
-print("\n".join(parts))
+# 4. Garante o daily de hoje + instrucao de documentacao
+today = ensure_today_daily()
+add(
+    f"--- Documentacao ---\n"
+    f"A nota de hoje existe em `01 Daily/{today}.md`. Registre decisoes reais nela "
+    f"ou em `03 Intelligence/decisions/` conforme trabalha.\n"
+)
+
+sys.stdout.write("\n".join(parts))

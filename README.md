@@ -9,6 +9,19 @@
 
 ---
 
+## Pré-requisitos
+
+Antes de começar, tenha instalado:
+
+- **Claude Code** (plano Pro ou Max): [claude.com/code](https://claude.com/code)
+- **Obsidian** (grátis): [obsidian.md](https://obsidian.md)
+- **Git** (já vem no macOS; no Windows, use o [Git for Windows](https://git-scm.com))
+- **Python 3** (`python3` disponível no terminal). É o que faz a injeção de contexto e a documentação automática rodarem. No macOS já vem instalado; no Windows, instale pela [python.org](https://www.python.org) ou use o WSL. Sem Python, o vault e os comandos continuam funcionando, você só perde a automação dos hooks.
+
+No Windows, o caminho mais tranquilo é rodar tudo dentro do WSL (Ubuntu). Lá o `python3` e os hooks funcionam igual ao macOS.
+
+---
+
 ## Começar em 1 minuto (cola o link no Claude)
 
 Não precisa saber terminal nem git. Faz assim:
@@ -57,6 +70,23 @@ O Claude monta o vault na pasta atual, instala o time de subagents e te guia pel
 
 ---
 
+## Mapa rápido do vault
+
+- [[CLAUDE]] contexto principal para a IA
+- [[AIOS/index]] comandos, mapas e camada portátil
+- [[AIOS/Vault-Map]] sitemap e roteamento
+- [[knowledge/index]] conhecimento permanente
+- [[prompts/README]] prompts copy-paste
+- [[00 Inbox/CLAUDE]] captura temporária
+- [[01 Daily/CLAUDE]] notas diárias
+- [[02 Context/CLAUDE]] identidade e contexto
+- [[03 Projects/CLAUDE]] projetos ativos
+- [[03 Intelligence/decisions/README]] decisões, reuniões e pesquisas
+- [[04 Resources/CLAUDE]] biblioteca reutilizável
+- [[05 Archives/_guide]] histórico
+
+---
+
 ## O que está incluído
 
 ```
@@ -102,13 +132,15 @@ cd meu-vault
 - Clique em "Open folder as vault"
 - Selecione a pasta `meu-vault`
 
-### Passo 3 — Rode `/setup` no Claude Code
+### Passo 3 — Rode o setup no Claude Code
 
 ```bash
 claude
 ```
 
-Dentro do Claude Code, rode `/setup`. Ele vai:
+Se voce seguiu o fluxo "Comecar em 1 minuto", nao precisa rodar comando: o Claude le `.claude/commands/setup.md` e executa o onboarding na conversa.
+
+Se voce instalou manualmente via `git clone`, dentro do Claude Code rode `/setup`. Ele vai:
 1. Perguntar se você quer um agente persistente
 2. Oferecer importar contexto de outra IA (ChatGPT, Claude, Gemini)
 3. Fazer 8 perguntas curtas
@@ -123,7 +155,8 @@ Dentro do Claude Code, rode `/setup`. Ele vai:
 | Comando | O que faz |
 |---|---|
 | `/setup` | Personalização inicial completa do vault |
-| `/assistente` | Operação diária — resume sessão, revisão diária/semanal, tasks, memória, reunião |
+| `/assistente` | Operação diária: resume sessão, revisão diária/semanal, tasks, memória, reunião |
+| `/organizar` | Limpa o vault: roteia notas órfãs, conecta com wikilinks, arquiva redundância |
 | `/importar-contexto` | Traz contexto de outra IA (ChatGPT, Claude, Gemini, Perplexity) |
 
 ### Escrita e conteúdo
@@ -205,6 +238,12 @@ Depois disso, `/assistente` vira o comando principal do dia a dia. Os outros com
 
 ---
 
+## Quando o grafo do Obsidian bagunçar
+
+Conforme você cola notas e trabalha, o grafo vai encher de notas soltas, sem links. É normal, não é defeito. Rode `/organizar`: ele encontra as notas órfãs, roteia pras pastas certas, conecta com wikilinks e arquiva o que for redundante, sem mexer na estrutura do vault nem nos hooks. Ele pergunta antes de mover quando tiver dúvida.
+
+---
+
 ## Adiciona o time de subagents
 
 Esse vault é o cérebro. Os **subagents** são o time que trabalha em cima dele.
@@ -226,7 +265,7 @@ Repo completo: [github.com/matheusvizotto/next-level-subagents](https://github.c
 
 ---
 
-## Imersão "Time de IA" — 06/06, 9h BRT
+## Imersão Segundo Cérebro, 27/06, 9h BRT
 
 Esse kit + os 4 subagents são a base, livres. Na imersão eu mostro o que não está aqui:
 
@@ -236,9 +275,9 @@ Esse kit + os 4 subagents são a base, livres. Na imersão eu mostro o que não 
 - Customização pro teu trabalho específico
 - Acesso vitalício à comunidade onde isso continua crescendo
 
-**Sábado 06/06/2026, 9h BRT, online, R$ 297, 200 vagas.**
+**Sábado 27/06/2026, 9h BRT, online. R$ 297 (lote atual), gravação +R$ 100. Vagas limitadas.**
 
-**[Inscrever na imersão](https://matheusvizotto.com/imersao)**
+**[Inscrever na imersão](https://matheusvizotto.com/pt-br/imersao-segundo-cerebro)**
 
 ---
 
