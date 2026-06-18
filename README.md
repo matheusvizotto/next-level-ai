@@ -265,7 +265,7 @@ Repo completo: [github.com/matheusvizotto/next-level-subagents](https://github.c
 
 ---
 
-## Imersão Segundo Cérebro, 27/06, 9h BRT
+## Imersão Segundo Cérebro
 
 Esse kit + os 4 subagents são a base, livres. Na imersão eu mostro o que não está aqui:
 
@@ -275,7 +275,7 @@ Esse kit + os 4 subagents são a base, livres. Na imersão eu mostro o que não 
 - Customização pro teu trabalho específico
 - Acesso vitalício à comunidade onde isso continua crescendo
 
-**Sábado 27/06/2026, 9h BRT, online. R$ 297 (lote atual), gravação +R$ 100. Vagas limitadas.**
+Data, preço e vagas atualizados na página da imersão.
 
 **[Inscrever na imersão](https://matheusvizotto.com/pt-br/imersao-segundo-cerebro)**
 
