@@ -185,3 +185,9 @@ Conectar com wikilinks faz o grafo do Obsidian crescer — você vê visualmente
 ## Roteamento rápido
 
 Pra saber pra onde vai uma informação nova, consulte [[AIOS/knowledge-routing]].
+
+---
+
+## Conectado a
+
+[[Home]] · [[index]] · [[knowledge-routing]] · [[operating-rules]] · [[project-map]]

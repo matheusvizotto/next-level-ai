@@ -11,6 +11,12 @@ tags: [index, navigation, knowledge]
 
 ---
 
+## Hub
+
+Voltar ao hub central do vault: [[Home]].
+
+---
+
 ## Como funciona
 
 Quando você abre o Claude Code (ou outra ferramenta) dentro deste vault, o hook `session-start.py` injeta este arquivo no contexto inicial. Tudo que estiver listado aqui ou linkado daqui fica disponível pra IA imediatamente.
@@ -82,3 +88,11 @@ Os arquivos abaixo são templates pra você preencher conforme seu trabalho exig
 2. Editar com seu conhecimento real (apaga o que é genérico, mantém o que é seu)
 3. Adicionar arquivos novos pros domínios que você não vê listados mas usa
 4. Na próxima sessão da IA, perceber que ela "sabe" do seu trabalho sem você explicar
+
+---
+
+## Navegação
+
+Domínios de conhecimento: [[copywriting]], [[content-strategy]], [[personal-brand]], [[growth-marketing]], [[seo-fundamentos]].
+
+Voltar para o [[Home|hub central]].

@@ -10,3 +10,7 @@ Captura rápida. Tudo que chega aqui precisa ser processado e movido.
   - É contexto permanente? → `02 Context/`
   - É reutilizável? → `04 Resources/`
   - É descartável? → delete
+
+---
+
+Navegação: volte para o hub em [[Home]]. Da triagem, os itens seguem para [[03 Projects/CLAUDE|Projects]], [[02 Context/CLAUDE|Context]] ou [[04 Resources/CLAUDE|Resources]].

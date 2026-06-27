@@ -80,4 +80,10 @@ NÃO faça:
 - Ler arquivos inteiros quando escaneando muitos — use `grep`
 - Atualizar daily em chat casual — só quando há algo digno
 - Criar tarefas como texto puro em notas — use callout `> [!todo]` pra serem queryable
-- Despejar tudo no daily — route pro arquivo certo conforme o tipo de conteúdo
+- Despejar tudo no daily, route pro arquivo certo conforme o tipo de conteúdo
+
+---
+
+## Conectado a
+
+[[Home]] · [[index]] · [[Vault-Map]] · [[knowledge-routing]] · [[project-map]]

@@ -1,6 +1,6 @@
-# Prompt 09 — Registro de Decisão
+# Prompt 09, Registro de Decisão
 
-**Quando usar:** Sempre que tomar uma decisão importante — de negócio, produto, carreira, ou estratégia.
+**Quando usar:** Sempre que tomar uma decisão importante, seja de negócio, produto, carreira ou estratégia.
 
 ---
 
@@ -18,7 +18,7 @@ A decisão:
 - Quando foi tomada: {{DATA}}
 - Quando devo revisar se foi a decisão certa: {{DATA FUTURA}}
 
-Crie um registro de decisão em 04 Resources/decisoes/{{DATA}}-{{SLUG DA DECISÃO}}.md com:
+Crie um registro de decisão em 03 Intelligence/decisions/YYYY-MM-DD-{{slug-da-decisao}}.md com:
 1. Resumo executivo da decisão (1 parágrafo)
 2. Contexto e problema que motivou
 3. Opções consideradas com prós e contras de cada
@@ -34,4 +34,8 @@ Formato: use callout [!important] para a decisão final e [!warning] para os ris
 
 ## O que esperar
 
-Um registro limpo que no futuro vai te dizer exatamente por que você tomou aquela decisão — sem depender da memória. Essencial para aprender com o tempo.
+Um registro limpo que no futuro vai te dizer exatamente por que você tomou aquela decisão, sem depender da memória. Essencial para aprender com o tempo.
+
+---
+
+Ver [[prompts/README|Índice de prompts]] ou voltar ao [[Home]].

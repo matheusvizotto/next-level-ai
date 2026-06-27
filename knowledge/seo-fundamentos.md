@@ -150,3 +150,11 @@ Quando ChatGPT/Perplexity citam fontes, eles preferem:
 
 - (sua regra de SEO 1)
 - (sua regra 2)
+
+---
+
+## Relacionados
+
+Base de conhecimento: [[index|Base de conhecimento]] · Hub: [[Home]].
+
+Domínios conectados: [[content-strategy]], [[growth-marketing]], [[copywriting]].

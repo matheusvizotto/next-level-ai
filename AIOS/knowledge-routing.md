@@ -111,3 +111,9 @@ Cada comando salva em pasta consistente:
 6. Não tenho certeza ainda? → `00 Inbox/`
 
 Quando em dúvida, escolha o lugar mais específico possível. `00 Inbox/` é último recurso, não primeiro.
+
+---
+
+## Conectado a
+
+[[Home]] · [[index]] · [[Vault-Map]] · [[operating-rules]] · [[project-map]]

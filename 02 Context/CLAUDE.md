@@ -15,3 +15,7 @@ Arquivos permanentes de identidade e contexto. Lidos no início de cada sessão.
 - Quando o usuário corrigir algo que você disse: salve a correção em `me.md` na seção relevante
 - Nunca pergunte "devo salvar?" — salve e informe onde
 - `me.md` é a fonte da verdade — se houver conflito com outra nota, confie no `me.md`
+
+---
+
+Navegação: [[Home]] · [[me]]

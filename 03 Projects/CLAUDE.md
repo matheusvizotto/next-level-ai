@@ -43,3 +43,7 @@ tags: [project]
 - Quando o usuário mencionar um projeto: roteie para `03 Projects/{nome}/README.md`
 - Projetos concluídos: mova para `04 Resources/arquivo/` ou exclua
 - Use wikilinks para conectar projetos a notas diárias e contexto
+
+---
+
+Navegação: volte para o hub em [[Home]]. Veja um modelo pronto em [[exemplo-projeto]] e registre o histórico de trabalho em [[01 Daily/CLAUDE|Daily]].

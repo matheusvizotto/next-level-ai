@@ -1,6 +1,6 @@
-# Prompt 05 — Plano de Projeto
+# Prompt 05, Plano de Projeto
 
-**Quando usar:** Ao iniciar qualquer projeto novo — trabalho, pessoal ou de negócio.
+**Quando usar:** Ao iniciar qualquer projeto novo, seja de trabalho, pessoal ou de negócio.
 
 ---
 
@@ -12,7 +12,7 @@ Quero estruturar um novo projeto.
 Contexto:
 - Nome do projeto: {{NOME}}
 - O que ele é: {{DESCREVA EM 2-3 FRASES O QUE ESTE PROJETO FAZ E POR QUÊ EXISTE}}
-- Resultado esperado: {{O QUE DEFINE SUCESSO — SEJA ESPECÍFICO}}
+- Resultado esperado: {{O QUE DEFINE SUCESSO, SEJA ESPECÍFICO}}
 - Prazo: {{DATA ALVO OU "sem prazo definido"}}
 - Recursos disponíveis: {{TEMPO POR SEMANA / ORÇAMENTO / PESSOAS}}
 - Principais riscos que já identifico: {{SE HOUVER}}
@@ -34,3 +34,7 @@ Deixe tudo no README.md criado.
 ## O que esperar
 
 Uma pasta de projeto estruturada com README completo, fases definidas, tarefas por fase, e um primeiro passo claro. Estrutura que cresce conforme o projeto avança.
+
+---
+
+Quer um modelo pronto para copiar? Veja [[exemplo-projeto]]. Ver [[prompts/README|Índice de prompts]] ou voltar ao [[Home]].

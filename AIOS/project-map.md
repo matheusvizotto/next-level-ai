@@ -83,4 +83,10 @@ Exemplo de formato — preencher conforme aparecem:
 - Um projeto = uma pasta em `03 Projects/{nome}/`
 - README é a porta de entrada — overview + status + próximos passos
 - Subpastas (research, specs, drafts, ideas, notes, feedback) aparecem conforme tipos de conteúdo emergem
-- Quando algo dura menos de 1 semana → não é projeto, fica em daily ou inbox
+- Quando algo dura menos de 1 semana, não é projeto, fica em daily ou inbox
+
+---
+
+## Conectado a
+
+[[Home]] · [[index]] · [[Vault-Map]] · [[knowledge-routing]] · [[operating-rules]]

@@ -111,3 +111,11 @@ Se você não souber as 4, a copy não está ruim — está incompleta.
 - (sua regra 1)
 - (sua regra 2)
 - (sua regra 3)
+
+---
+
+## Relacionados
+
+Base de conhecimento: [[index|Base de conhecimento]] · Hub: [[Home]].
+
+Domínios conectados: [[content-strategy]], [[personal-brand]], [[growth-marketing]].

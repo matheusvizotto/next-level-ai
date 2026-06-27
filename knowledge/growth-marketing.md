@@ -137,3 +137,11 @@ Experimento sem hipótese é prejuízo aleatório.
 
 - Princípio 1
 - Princípio 2
+
+---
+
+## Relacionados
+
+Base de conhecimento: [[index|Base de conhecimento]] · Hub: [[Home]].
+
+Domínios conectados: [[content-strategy]], [[seo-fundamentos]], [[copywriting]].

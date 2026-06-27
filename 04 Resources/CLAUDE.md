@@ -23,3 +23,7 @@ Biblioteca pessoal reutilizável. Prompts, frameworks, referências, templates.
 - Quando o usuário compartilhar um prompt, framework ou template reutilizável: salve aqui com nome descritivo
 - Quando o usuário disser "salva isso para usar depois": roteie para cá
 - Não crie subpastas vazias — crie a pasta só quando houver conteúdo para ela
+
+---
+
+Navegação: volte para o hub em [[Home]]. Material que sai de projetos chega aqui vindo de [[03 Projects/CLAUDE|Projects]], e o que aposenta de vez vai para [[05 Archives/_guide|Archives]].

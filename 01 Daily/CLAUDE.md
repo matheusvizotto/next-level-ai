@@ -30,3 +30,7 @@ tags: [daily]
 - Nunca edite uma nota de dia anterior — crie uma nova
 - Ao capturar algo importante (decisão, insight, projeto novo), roteie para a pasta certa e deixe só um wikilink aqui
 - Se o usuário disser "anota isso" ou "salva aqui", salve na nota do dia atual
+
+---
+
+Navegação: volte para o hub em [[Home]]. Capturas soltas começam no [[00 Inbox/CLAUDE|Inbox]] e o que vira projeto segue para [[03 Projects/CLAUDE|Projects]].

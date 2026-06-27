@@ -48,8 +48,7 @@ Exemplo: *Sou gerente de marketing em uma empresa de SaaS B2B. Cuido de geraçã
 {{DESCREVA EM 1-2 FRASES O QUE VOCÊ QUER CONQUISTAR}}
 
 **Projetos ativos:**
-- [[03 Projects/{{NOME DO PROJETO 1}}]] — {{STATUS}}
-- [[03 Projects/{{NOME DO PROJETO 2}}]] — {{STATUS}}
+- Exemplo: [[exemplo-projeto]] (apague e adicione os seus; o /setup também preenche aqui)
 
 ---
 
@@ -122,3 +121,7 @@ Se não criar conteúdo, deletar esta seção inteira.
 ---
 
 *Última atualização: {{DATA}}*
+
+---
+
+Navegação: [[Home]] · [[02 Context/CLAUDE|guia desta pasta]]

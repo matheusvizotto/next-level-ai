@@ -105,3 +105,11 @@ Defina 3-5 pilares. Cada peça é claramente 1 deles.
 - (sua regra 1)
 - (sua regra 2)
 - (sua regra 3)
+
+---
+
+## Relacionados
+
+Base de conhecimento: [[index|Base de conhecimento]] · Hub: [[Home]].
+
+Domínios conectados: [[copywriting]], [[growth-marketing]], [[seo-fundamentos]].

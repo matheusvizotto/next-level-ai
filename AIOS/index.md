@@ -37,7 +37,8 @@ Por isso `01 Daily/YYYY-MM-DD.md` é sempre lido na próxima sessão — vira me
 | Comando | O que faz |
 |---|---|
 | `/setup` | Personalização inicial completa do vault |
-| `/assistente` | Operação diária — resume sessão, revisões, tasks, memória |
+| `/assistente` | Operação diária, resume sessão, revisões, tasks, memória |
+| `/organizar` | Limpa o vault: roteia notas órfãs, conecta com wikilinks, arquiva redundância |
 | `/importar-contexto` | Trazer contexto de outra IA pro vault |
 
 ### Escrita e conteúdo
@@ -83,8 +84,14 @@ Cada arquivo abaixo responde a uma pergunta diferente:
 
 ## Princípios da camada portátil
 
-1. **Markdown puro** — nada de formatos proprietários
-2. **Sem código em arquivos de contexto** — só texto que qualquer IA entende
-3. **Caminhos relativos** — funciona em qualquer máquina
-4. **Self-describing** — cada arquivo tem frontmatter explicando o que é
-5. **Atualizável pela IA** — quando algo muda, a IA atualiza este arquivo automaticamente
+1. **Markdown puro**, nada de formatos proprietários
+2. **Sem código em arquivos de contexto**, só texto que qualquer IA entende
+3. **Caminhos relativos**, funciona em qualquer máquina
+4. **Self-describing**, cada arquivo tem frontmatter explicando o que é
+5. **Atualizável pela IA**, quando algo muda, a IA atualiza este arquivo automaticamente
+
+---
+
+## Conectado a
+
+[[Home]] · [[Vault-Map]] · [[knowledge-routing]] · [[operating-rules]] · [[project-map]]

@@ -1,4 +1,4 @@
-# Prompt 08 — Revisão Semanal
+# Prompt 08, Revisão Semanal
 
 **Quando usar:** Toda sexta-feira ou segunda-feira de manhã.
 
@@ -15,7 +15,7 @@ O que estava planejado para esta semana:
 {{LISTA DE OBJETIVOS OU PROJETOS QUE DEVERIAM AVANÇAR}}
 
 O que de fato aconteceu:
-{{DESCREVA EM TEXTO LIVRE — CONQUISTAS, PROBLEMAS, SURPRESAS}}
+{{DESCREVA EM TEXTO LIVRE: CONQUISTAS, PROBLEMAS, SURPRESAS}}
 
 Métricas ou números da semana (se relevante):
 {{EX: vendas, leads, publicações feitas, tarefas concluídas}}
@@ -37,3 +37,7 @@ Com base nisso:
 ## O que esperar
 
 Uma análise honesta da semana com taxa de conclusão, padrões identificados, e foco claro para a próxima semana. Em 5 minutos você já sabe onde está e para onde vai.
+
+---
+
+Ver [[prompts/README|Índice de prompts]] ou voltar ao [[Home]].

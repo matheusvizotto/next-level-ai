@@ -56,3 +56,7 @@ Sugestão de regra:
 - Decisão revisada → versão antiga vai pra `archives/decisions/`, versão nova fica em `Intelligence/decisions/`
 
 Você pode rodar `/assistente` em modo "memory" ou pedir pra IA "arquiva o que está parado há mais de 30 dias" pra automatizar.
+
+---
+
+Navegação: volte para o hub em [[Home]]. As decisões revogadas chegam aqui vindas de [[03 Intelligence/decisions/README|Decisions]], e projetos aposentados saem de [[03 Projects/CLAUDE|Projects]].

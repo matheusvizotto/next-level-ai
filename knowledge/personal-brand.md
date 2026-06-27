@@ -100,3 +100,11 @@ Equilibrar os 5 → marca tridimensional. Só publicar 1 tipo → marca chata ou
 1. Pilar 1: ...
 2. Pilar 2: ...
 3. Pilar 3: ...
+
+---
+
+## Relacionados
+
+Base de conhecimento: [[index|Base de conhecimento]] · Hub: [[Home]].
+
+Domínios conectados: [[content-strategy]], [[copywriting]], [[growth-marketing]].

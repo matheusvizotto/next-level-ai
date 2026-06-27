@@ -46,7 +46,7 @@ knowledge/       — Knowledge hub auto-loaded em cada sessão
 prompts/         — 10 prompts copy-paste prontos
 ```
 
-Detalhes completos em `AIOS/Vault-Map.md`.
+Detalhes completos em `AIOS/Vault-Map.md`. Ponto de partida do grafo: [[Home]].
 
 ---
 
@@ -70,6 +70,8 @@ Detalhes completos em `AIOS/Vault-Map.md`.
 | Conteúdo finalizado | `05 Archives/` |
 
 Tabela completa em `AIOS/knowledge-routing.md`.
+
+> Nota: os arquivos `02 Context/operator.md`, `organization.md`, `team.md`, `estrategia.md` e `marca.md` são criados pelo `/setup`, conforme o modo (solo ou empresa) e as respostas. Podem não existir ainda no seu vault. As referências acima ficam prontas pra quando forem criados.
 
 ---
 
